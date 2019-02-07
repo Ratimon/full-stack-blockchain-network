@@ -1,0 +1,25 @@
+{
+  "name": "full-stack-blockchain-network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ratimon/full-stack-blockchain-network.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ratimon/full-stack-blockchain-network/issues"
+  },
+  "homepage": "https://github.com/Ratimon/full-stack-blockchain-network#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "bignumber.js": "^8.0.2"
+  }
+}
