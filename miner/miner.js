@@ -1,0 +1,3 @@
+/*
+  Create miner for block here
+*/
