@@ -1,8 +1,30 @@
+// const fs = require('fs');
+const path = require('path');
+
+// TODO: File System implemenatation
+const p = path.join(
+    // path.dirname(process.mainModule.filename),
+    path.dirname(require.main.filename),
+    'data',
+    'blockchain.json'
+  );
+
 const Block = require('./block');
 const cryptoHash = require('../util/crypto-hash');
 
 const BLOCK_TIME = 10;
 const DIFFICULTY_ADJUSTMENT_INTERVAL = 10;
+
+// TODO: File System implemenatation
+// const getBlocksFromFile = cb => {
+//     fs.readFile(p, (err, fileContent) => {
+//       if (err) {
+//         cb([]);
+//       } else {
+//         cb(JSON.parse(fileContent));
+//       }
+//     });
+//   };
 
 class Blockchain {
     constructor() {
@@ -15,14 +37,22 @@ class Blockchain {
             data,
             difficulty: Blockchain.getDifficulty(this.chain)
             // difficulty: this.chain[this.chain.length-1].difficulty
-
         })
 
         this.chain.push(validatedBlock);
+
+        // TODO: File System implemenatation
+        // getBlocksFromFile(blocks => {
+        //     this.chain.push(validatedBlock);
+        //     fs.writeFile(p, JSON.stringify(blocks), err => {
+        //       console.log(err);
+        //     });
+        //   });
     }
 
     replaceChain(chain){
-        if(chain.length <= this.chain.length){
+        // if(chain.length <= this.chain.length){
+        if(Blockchain.getCumulativeDifficulty(chain) <= Blockchain.getCumulativeDifficulty(this.chain)){
             console.error('The new chain must be longer');
             return;
         };
@@ -35,6 +65,20 @@ class Blockchain {
 
         console.log('replacing chain waith', chain);
         this.chain = chain;
+    }
+
+    // TODO: File System implemenatation
+    // saveBlockFile(block) {
+    //     getBlocksFromFile(blocks => {
+    //       this.chain.push(block);
+    //       fs.writeFile(p, JSON.stringify(blocks), err => {
+    //         console.log(err);
+    //       });
+    //     });
+    //   }
+
+    static fetchAll(cb) {
+        getBlocksFromFile(cb);
     }
 
     static isValidChain(chain) {
@@ -79,17 +123,7 @@ class Blockchain {
         } else {
             return difficulty;
         }
-    };
-
-    // static getDifficulty = (chain) => {
-    //     const latestBlock = chain[blockchain.length - 1];
-    //     // const {index, } = latestBlock
-    //     if (latestBlock.index % DIFFICULTY_ADJUSTMENT_INTERVAL === 0 && latestBlock.index !== 0) {
-    //         return getAdjustedDifficulty(latestBlock, chain);
-    //     } else {
-    //         return latestBlock.difficulty;
-    //     }
-    // };    
+    };  
     
     static getAdjustedDifficulty (latestBlock, chain) {
         const preAdjustedBlock = chain[chain.length - DIFFICULTY_ADJUSTMENT_INTERVAL];
@@ -102,6 +136,13 @@ class Blockchain {
         } else {
             return preAdjustedBlock.difficulty;
         }
+    }
+
+    static getCumulativeDifficulty(chain) {
+        return chain
+            .map((block) => block.difficulty)
+            .map((difficulty) => Math.pow(2, difficulty))
+            .reduce((a, b) => a + b);
     }
 
 }

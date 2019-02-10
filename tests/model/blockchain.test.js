@@ -1,6 +1,6 @@
-const Blockchain = require('./index');
-const Block = require('./block');
-const cryptoHash = require('../util/crypto-hash');
+const Blockchain = require('../../model/blockchain');
+const Block = require('../../model/block');
+// const cryptoHash = require('../util/crypto-hash');
 
 describe('Blockchain', ()=>{
     let blockchain, newChain, originalChain;
@@ -11,19 +11,27 @@ describe('Blockchain', ()=>{
         originalChain = blockchain.chain;
     });
 
-    it('contains a `chain` Array instance', ()=> {
+    it('should contain a `chain` Array instance', ()=> {
         expect(blockchain.chain instanceof Array).toBe(true);
     });
 
-    it('starts with the genesis block', ()=> {
+    it('should start with the genesis block', ()=> {
         expect(blockchain.chain[0]).toEqual(Block.genesis());
     });
 
-    it('adds a new block to the chain', ()=> {
+    it('should add  a new block to the chain', ()=> {
         const newData = 'foo bar';
         blockchain.addBlock({data: newData});
 
         expect(blockchain.chain[blockchain.chain.length-1].data).toEqual(newData);
+    });
+
+    // describe('fetchAll()', ()=> {
+    //     it('should (return the block chain data(all chains))', )
+    // });
+
+    describe('findById(id, chain)', ()=>{
+
     });
 
     describe('isValidChain(chain)', ()=>{
@@ -87,7 +95,7 @@ describe('Blockchain', ()=>{
         });
     });
 
-    describe('replaceChain()', ()=> {
+    describe('replaceChain(newchain)', ()=> {
         let errorMock, logMock;
 
         beforeEach(()=> {
@@ -181,7 +189,19 @@ describe('Blockchain', ()=>{
     
         //   expect(Block.adjustDifficulty({ originalBlock: block })).toEqual(1);
         // });
-      });
+    });
+
+    describe('getCumulativeDifficulty(chain)', ()=> {
+        beforeEach(()=> {
+            newChain.addBlock({ data: 'Beers'});
+            newChain.addBlock({ data: 'Beets'});
+            newChain.addBlock({ data: 'Battlestar Glactica'});
+        });
+
+        it('should return total difficulty of 2^3',()=>{
+            expect(Blockchain.getCumulativeDifficulty(newChain.chain)).toEqual(8);
+        });
+    });
 
 
 })

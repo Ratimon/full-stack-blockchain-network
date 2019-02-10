@@ -1,7 +1,6 @@
 const { GENESIS_DATA } = require('./config');
 const cryptoHash = require('../util/crypto-hash');
 const BigNumber = require('bignumber.js');
-// const Blockchain = require('./index');
 
 const MINTING_INDEX = 100;
 
