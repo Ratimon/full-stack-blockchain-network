@@ -9,11 +9,12 @@ exports.getBlocks = (req, res, next) => {
     // Blockchain.fetchAll(blocks => {
     //     res.json(blocks);
     // });
+
     res.json(blockchain.chain);
 };
 
 exports.getBlock = (req, res, next) => {
-    const {blockId} = req.params;
+    const blockId = req.params.blockId;
     res.json(blockchain.chain[blockId]);
 };
 
@@ -22,6 +23,6 @@ exports.postValidateBlock = (req, res, next) => {
     const {data} = req.body;
     blockchain.addBlock({data});
     pubsub.broadcastChain();
-    res.redirect('/blocks');
+    res.redirect('/blocks-test');
 };
 
