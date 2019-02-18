@@ -1,27 +1,29 @@
-// //TODO : make it work
-// const request = require('supertest');
-// const express = require('express');
+//TODO : make it work
+const request = require('supertest');
+const express = require('express');
 
-// describe('api/blocks',()=>{
-//     let app;
+const Blockchain = require('../../model/blockchain');
 
-//     beforeEach(()=> {
-//         app = require('../../index');
-//         blockchain  = new Blockchain();
-//     });
+describe('api/blocks',()=>{
+    let app;
 
-//     afterEach(()=>{
-//         app.close();
-//         // blockchain = undefined;
-//     })
+    beforeEach(()=> {
+        app = require('../../index');
+        blockchain  = new Blockchain();
+    });
 
-//     describe('GET /',()=>{
-//         it('should return an array containing blocks',async ()=>{
-//             const res = await request(app).get('/blocks')
+    afterEach(()=>{
+        // app.close();
+        // blockchain = undefined;
+    })
 
-//             expect(res.status).toBe(200);
-//             expect(res.body.length).toBe(1);
+    describe('GET /',()=>{
+        it('should return an array containing blocks',async ()=>{
+            // const res = await request(app).get('/blocks')
 
-//         });
-//     });
-// });
+            // expect(res.status).toBe(200);
+            // expect(res.body.length).toBe(1);
+
+        });
+    });
+});
