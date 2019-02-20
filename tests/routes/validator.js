@@ -2,6 +2,8 @@
 // const request = require('supertest');
 // const express = require('express');
 
+// const Blockchain = require('../../model/blockchain');
+
 // describe('api/blocks',()=>{
 //     let app;
 
@@ -11,16 +13,16 @@
 //     });
 
 //     afterEach(()=>{
-//         app.close();
+//         // app.close();
 //         // blockchain = undefined;
 //     })
 
 //     describe('GET /',()=>{
 //         it('should return an array containing blocks',async ()=>{
-//             const res = await request(app).get('/blocks')
+//             // const res = await request(app).get('/blocks')
 
-//             expect(res.status).toBe(200);
-//             expect(res.body.length).toBe(1);
+//             // expect(res.status).toBe(200);
+//             // expect(res.body.length).toBe(1);
 
 //         });
 //     });

@@ -10,6 +10,9 @@
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
     "start-redis": "redis-server --daemonize yes"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ratimon/full-stack-blockchain-network.git"
@@ -22,16 +25,18 @@
   "homepage": "https://github.com/Ratimon/full-stack-blockchain-network#readme",
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "jest": "^24.1.0",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "supertest": "^3.4.2"
   },
   "dependencies": {
     "bignumber.js": "^8.0.2",
     "body-parser": "^1.18.3",
+    "elliptic": "^6.4.1",
     "express": "^4.16.4",
     "redis": "^2.8.0",
     "redis-server": "^1.2.2",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "uuid": "^3.3.2"
   }
 }

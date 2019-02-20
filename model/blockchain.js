@@ -63,7 +63,7 @@ class Blockchain {
             return;
         }
 
-        console.log('replacing chain with ', chain);
+        console.log('replacing chain waith', chain);
         this.chain = chain;
     }
 
@@ -114,7 +114,7 @@ class Blockchain {
 
     static getDifficulty (chain) {
         const latestBlock = chain[chain.length - 1];
-        const {index, difficulty } = latestBlock;
+        const {index, difficulty } = latestBlock
 
         if (difficulty < 1) return 1;
 
