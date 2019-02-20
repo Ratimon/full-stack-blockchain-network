@@ -1,4 +1,7 @@
 const PubSub = require('./pubsub');
+const TransactionPool = require('../wallet/transaction-pool');
+
+const transactionPool = new TransactionPool()
 const blockchain = require('../model/index')
 
 // create a unique, global symbol name
@@ -22,7 +25,7 @@ if (!hasPubsub){
 // define the singleton API
 // ------------------------
 
-var pubsub = new PubSub({ blockchain});;
+var pubsub = new PubSub({ blockchain, transactionPool});
 
 Object.defineProperty(pubsub, "instance", {
   get: function(){
@@ -38,4 +41,5 @@ Object.defineProperty(pubsub, "instance", {
 // export the singleton API only
 // -----------------------------
 
-module.exports = pubsub;
+module.exports = {pubsub, transactionPool};
+// module.exports = pubsub;

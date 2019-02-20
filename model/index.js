@@ -22,7 +22,7 @@ if (!hasBlockchain){
 // define the singleton API
 // ------------------------
 
-var blockchain = new Blockchain;
+var blockchain = new Blockchain();
 
 Object.defineProperty(blockchain, "instance", {
   get: function(){

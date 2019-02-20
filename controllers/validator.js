@@ -1,7 +1,5 @@
-// const Blockchain = require('../model/blockchain');
-
-const blockchain = require('../model/index')
-const pubsub = require('../network/index');
+const blockchain = require('../model/index');
+const {pubsub} = require('../network/index');
 
 
 exports.getBlocks = (req, res, next) => {
