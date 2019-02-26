@@ -21,10 +21,12 @@ class Block {
         return new this(GENESIS_DATA);
     }
 
-    static validateBlock({previousBlock, data, difficulty}){
+    static validateBlock({previousBlock, data, difficulty, minterBalance, minterAddress }){
+    // static validateBlock({previousBlock, data, difficulty }){
+
         const previousHash = previousBlock.hash;
-        // let {index, difficulty, minterBalance, minterAddress } = previousBlock;
-        let {index, minterBalance, minterAddress } = previousBlock;
+        // let {index, minterBalance, minterAddress } = previousBlock;
+        let {index } = previousBlock;
 
 
         index++;

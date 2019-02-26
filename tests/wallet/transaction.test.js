@@ -2,6 +2,7 @@ const Transaction = require('../../wallet/transaction');
 const Wallet = require('../../wallet/index');
 const {verifySignature} = require('../../util/index');
 
+const {REWARD_INPUT, REWARD} = require('../../wallet/config')
 
 describe('Transaction',()=>{
     let transaction, senderWallet, recipient, amount;
@@ -165,4 +166,24 @@ describe('Transaction',()=>{
 
         });
     });
+
+    describe('rewardTransaction()', () => {
+        let rewardTransaction, validatorWallet;
+    
+        beforeEach(() => {
+          validatorWallet = new Wallet();
+          rewardTransaction = Transaction.rewardTransaction({ validatorWallet });
+        });
+    
+        it('creates a transaction with the reward input', () => {
+          expect(rewardTransaction.input).toEqual(REWARD_INPUT);
+        });
+    
+        it('creates one transaction for the miner with the `REWARD`', () => {
+          expect(rewardTransaction.outputMap[validatorWallet.publicKey]).toEqual(REWARD);
+        });
+        
+      });
+
+
 });

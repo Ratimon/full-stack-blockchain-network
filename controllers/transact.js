@@ -1,8 +1,6 @@
-const Wallet = require('../wallet/index')
-// const TransactionPool = require('../wallet/transaction-pool');
-
-const {pubsub, transactionPool} = require('../network/index')
-const wallet = new Wallet();
+// const Wallet = require('../wallet/index')
+const {blockchain, pubsub, wallet, transactionPool} = require('../network/index')
+// const wallet = new Wallet();
 
 
 exports.transact = (req, res) => {
@@ -15,7 +13,11 @@ exports.transact = (req, res) => {
         if (transaction) {
             transaction.update({ senderWallet: wallet, recipient, amount});
         } else {
-            transaction = wallet.createTransaction({recipient, amount});
+            transaction = wallet.createTransaction({
+                recipient,
+                amount,
+                chain: blockchain.chain
+            });
         }
     } catch(error) {
         return res.status(400).json({ type: 'error', message: error.message});
