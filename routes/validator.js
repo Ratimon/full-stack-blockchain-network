@@ -10,5 +10,6 @@ router.get('/blocks/:blockId', validatorController.getBlock);
 
 router.post('/validate', validatorController.postValidateBlock);
 
+router.get('/validate-transactions', validatorController.getValidateTransactions);
 
 module.exports = router;

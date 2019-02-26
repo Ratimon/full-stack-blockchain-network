@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 
-const blockchain = require('./model/index');
-const {transactionPool} = require('./network/index');
+const Wallet = require('./wallet/index')
+// const blockchain = require('./model/index');
+const {blockchain, transactionPool, wallet} = require('./network/index');
 
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`
@@ -16,6 +17,15 @@ app.use(bodyParser.json());
 
 app.use(validatorRoutes);
 app.use(transactRoutes);
+
+app.get('/wallet-info', (req, res) => {
+    const address = wallet.publicKey;
+  
+    res.json({
+      address,
+      balance: Wallet.calculateBalance({ chain: blockchain.chain, address })
+    });
+  });
 
 const syncWithRootState = ()=> {
     request({ url:`${ROOT_NODE_ADDRESS}/blocks`}, (error, response, body)=>{

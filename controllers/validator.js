@@ -1,7 +1,6 @@
 // const Blockchain = require('../model/blockchain');
-
-const blockchain = require('../model/index')
-const {pubsub} = require('../network/index');
+// const blockchain = require('../model/index')
+const {blockchain, pubsub, transactionValidator} = require('../network/index');
 
 
 exports.getBlocks = (req, res, next) => {
@@ -22,6 +21,13 @@ exports.postValidateBlock = (req, res, next) => {
     const {data} = req.body;
     blockchain.addBlock({data});
     pubsub.broadcastChain();
+    res.redirect('/blocks');
+};
+
+exports.getValidateTransactions = (req, res) => {
+
+    transactionValidator.validateTransaction();
+
     res.redirect('/blocks');
 };
 

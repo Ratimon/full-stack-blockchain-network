@@ -48,7 +48,7 @@ describe('block', ()=>{
             previousBlock = Block.genesis();
             data = 'validated data';
             difficulty = previousBlock.difficulty
-            validatedBlock = Block.validateBlock({previousBlock, data, difficulty});
+            validatedBlock = Block.validateBlock({previousBlock, data, difficulty, minterBalance, minterAddress});
         });
 
 

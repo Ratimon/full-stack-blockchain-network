@@ -1,9 +1,14 @@
 const Blockchain = require('../model/blockchain');
-
+const Wallet = require('../wallet/index');
 
 const blockchain = new Blockchain();
+const validatorWallet = new Wallet();
 
-blockchain.addBlock({ data: 'initial' });
+blockchain.addBlock({
+  data: 'initial',
+  balance: validatorWallet.balance,
+  address: validatorWallet.publicKey
+});
 
 console.log('first block', blockchain.chain[blockchain.chain.length-1]);
 
@@ -14,7 +19,11 @@ const times = [];
 for (let i=0; i<10000; i++) {
   previousTimestamp = blockchain.chain[blockchain.chain.length-1].timestamp;
 
-  blockchain.addBlock({ data: `block ${i}`});
+  blockchain.addBlock({
+    data: `block ${i}`,
+    balance: validatorWallet.balance,
+    address: validatorWallet.publicKey
+  });
   nextBlock = blockchain.chain[blockchain.chain.length-1];
 
   nextTimestamp = nextBlock.timestamp;

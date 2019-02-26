@@ -10,10 +10,13 @@ const p = path.join(
   );
 
 const Block = require('./block');
+const Wallet = require('../wallet/index')
+const Transaction = require('../wallet/transaction')
 const cryptoHash = require('../util/crypto-hash');
 
 const BLOCK_TIME = 10;
 const DIFFICULTY_ADJUSTMENT_INTERVAL = 10;
+const {REWARD_INPUT, REWARD} = require('../wallet/config')
 
 // TODO: File System implemenatation
 // const getBlocksFromFile = cb => {
@@ -31,12 +34,16 @@ class Blockchain {
         this.chain = [Block.genesis()];
     }
 
-    addBlock({data}){
+    // addBlock({data}){
+    addBlock({data, balance, address}){
+
         const validatedBlock = Block.validateBlock({
             previousBlock: this.chain[this.chain.length-1],
             data,
-            difficulty: Blockchain.getDifficulty(this.chain)
+            difficulty: Blockchain.getDifficulty(this.chain),
             // difficulty: this.chain[this.chain.length-1].difficulty
+            minterBalance: balance,
+            minterAddress: address
         })
 
         this.chain.push(validatedBlock);
@@ -50,21 +57,75 @@ class Blockchain {
         //   });
     }
 
-    replaceChain(chain){
+    replaceChain(chain, validTransactions, onSuccess){
         // if(chain.length <= this.chain.length){
-        if(Blockchain.getCumulativeDifficulty(chain) <= Blockchain.getCumulativeDifficulty(this.chain)){
+        if( Blockchain.getCumulativeDifficulty(chain) <= Blockchain.getCumulativeDifficulty(this.chain)){
             console.error('The new chain must be longer');
             return;
         };
 
         if(!Blockchain.isValidChain(chain)) {
             console.error('The new chain must be valid');
-
             return;
         }
 
-        console.log('replacing chain waith', chain);
+        if(validTransactions &&!this.validTransactionData({chain})) {
+            console.error('The new chain has invalid data');
+            return;
+        }
+
+        if(onSuccess) onSuccess()
+
+        console.log('replacing chain with', chain);
         this.chain = chain;
+    }
+
+    validTransactionData({chain}) {
+        for(let i=1; i<chain.length; i++) {
+            const block = chain[i];
+            const transactionSet = new Set();
+            let rewardTransactionCount = 0;
+
+            for(let transaction of block.data){
+                if(transaction.input.address === REWARD_INPUT.address) {
+                    rewardTransactionCount += 1;
+
+                    if(rewardTransactionCount > 1) {
+                        console.error('Rewards exceed limit');
+                        return false;
+                    }
+
+                    if(Object.values(transaction.outputMap)[0] !== REWARD) {
+                        console.error('reward amount is invalid');
+                        return false;
+                    }
+                } else {
+                    if(!Transaction.validTransaction(transaction)) {
+                        console.error('Invalid transaction')
+                        return false;
+                    }
+
+                    const trueBalance = Wallet.calculateBalance({
+                        chain: this.chain,
+                        address: transaction.input.address
+                      });
+            
+                      if (transaction.input.amount !== trueBalance) {
+                        console.error('Invalid input amount');
+                        return false;
+                      }
+
+                      if(transactionSet.has(transaction)) {
+                        console.error('An identical transaction appears more than once in the block');
+                        return false;
+                      } else {
+                          transactionSet.add(transaction);
+                      }
+
+                }
+            }
+        }
+        return true;
     }
 
     // TODO: File System implemenatation
@@ -77,9 +138,9 @@ class Blockchain {
     //     });
     //   }
 
-    static fetchAll(cb) {
-        getBlocksFromFile(cb);
-    }
+    // static fetchAll(cb) {
+    //     getBlocksFromFile(cb);
+    // }
 
     static isValidChain(chain) {
 
@@ -144,6 +205,8 @@ class Blockchain {
             .map((difficulty) => Math.pow(2, difficulty))
             .reduce((a, b) => a + b);
     }
+
+   
 
 }
 
