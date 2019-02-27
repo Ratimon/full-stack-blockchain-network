@@ -19,6 +19,7 @@ exports.getBlock = (req, res, next) => {
 exports.postValidateBlock = (req, res, next) => {
 
     const {data} = req.body;
+    //TODO: handling balance and address parameters
     blockchain.addBlock({data});
     pubsub.broadcastChain();
     res.redirect('/blocks');
