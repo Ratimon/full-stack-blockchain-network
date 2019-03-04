@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Naivechain Explorer</title>
+        <meta name="description" content="An explorer for proof-of-stack blockchain">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header class="header-sect">
+            <l class="logo-container">
+                <a class="logo" href="default.html">Naivechain</a>
+            </l>
+            <l class="menu-container">
+                <a class="menu-item" href="#target">Command</a>
+                <a class="menu-item" href="https://github.com/Ratimon/full-stack-blockchain-network">Code</a>
+                <a class="menu-item" href="https://blog.ethereum.org/2014/07/05/stake/">Concept</a>
+            </l>
+        </header>
+        <div class="query-sect">
+           <form class="query-form">
+                <span class="query-span">Search</span>  
+                <input id="txSearchInput" type="text" placeholder="Enter transaction ID here ..." class="query-input" autocomplete="off"> 
+                <button type="submit" class="query-button">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+        </div>
+        <div class="report-sect">
+            <div class="block-list">
+                <div>Latest blocks</div>
+                <div class="block-card">
+                    <span class="block-button">Bk</span>
+                    <span class="block-number">789123</span>
+                    <span>miner:</span>
+                    <span class="block-miner">55556666</span>
+                </div>
+                <div class="block-card">
+                    <span class="block-button">Bk</span>
+                    <span class="block-number">789123</span>
+                    <span>miner:</span>
+                    <span class="block-miner">55556666</span>
+                </div>
+            </div>
+            <div class="transaction-list">
+                <div>Latest transactions</div>
+                <div class="transaction-card">
+                    <span class="transaction-button">Tx</span>
+                    <span class="transaction-id">987654321</span>
+                    <span>from:</span>
+                    <span class="transaction-from">77778888</span>
+                    <span>to:</span>
+                    <span class="transaction-to">88889999</span>
+                </div>
+                <div class="transaction-card">
+                    <span class="transaction-button">Tx</span>
+                    <span class="transaction-id">987654321</span>
+                    <span>from:</span>
+                    <span class="transaction-from">77778888</span>
+                    <span>to:</span>
+                    <span class="transaction-to">88889999</span>
+                </div>
+            </div>
+        </div>
+        <script src="" async defer></script>
+        <!-- Footer -->
+        <footer>  
+            <p>Powered by PoS Consensus</p>
+        </footer>
+    </body>
+</html>
