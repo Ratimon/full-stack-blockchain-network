@@ -1,20 +1,4 @@
-// const Blockchain = require('../model/blockchain');
-// const blockchain = require('../model/index')
-const {blockchain, pubsub, transactionValidator} = require('../network/index');
-
-
-exports.getBlocks = (req, res, next) => {
-    // TODO: File System implemenatation
-    // Blockchain.fetchAll(blocks => {
-    //     res.json(blocks);
-    // });
-    res.json(blockchain.chain);
-};
-
-exports.getBlock = (req, res, next) => {
-    const {blockId} = req.params;
-    res.json(blockchain.chain[blockId]);
-};
+const {blockchain, pubsub, transactionPool, transactionValidator} = require('../backend/index');
 
 exports.postValidateBlock = (req, res, next) => {
 
@@ -22,13 +6,18 @@ exports.postValidateBlock = (req, res, next) => {
     //TODO: handling balance and address parameters
     blockchain.addBlock({data});
     pubsub.broadcastChain();
-    res.redirect('/blocks');
+    // res.redirect('explorer/blocks');
 };
 
 exports.getValidateTransactions = (req, res) => {
 
-    transactionValidator.validateTransaction();
+    // try {
+        transactionValidator.validateTransaction();
+    // } catch(error) {
+    //     return res.status(400).json({ type: 'error', message: error.message});
+    // }
 
-    res.redirect('/blocks');
+    res.json(transactionPool.transactionMap)
+
 };
 

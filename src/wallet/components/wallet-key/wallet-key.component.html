@@ -1,0 +1,39 @@
+<mat-card class="wallet-key-card">
+
+    <mat-card-header>
+      <mat-icon>account_balance_wallet</mat-icon>
+      <mat-card-title><h2>
+          This is your private key
+        </h2></mat-card-title>
+      <mat-card-subtitle><h2>
+          Please copy the key, then store it in secure place to use this wallet again
+        </h2></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="container">
+        <mat-form-field>
+
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              value="{{privateKey}}"
+              class="key-form__input"
+              readonly
+              #userinput>
+
+            <mat-icon matSuffix
+              (click)="hide = !hide">
+              {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="copyInputMessage(userinput)">
+          Copy to Clipboard
+      </button>
+    </mat-card-content>
+
+</mat-card>

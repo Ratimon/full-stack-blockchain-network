@@ -19,7 +19,7 @@ describe('Wallet',()=>{
         expect(wallet).toHaveProperty('publicKey');
     });
 
-    describe('signing data',()=>{
+    describe('sign()',()=>{
         const data ='test';
 
         it('verifies a signature', ()=>{
@@ -138,6 +138,7 @@ describe('Wallet',()=>{
               balance: validatorWallet.balance,
               address: validatorWallet.publicKey
             });
+
           });
     
           it(' should add the sum of all outputs to the wallet balance', () => {
@@ -229,5 +230,54 @@ describe('Wallet',()=>{
           });
         });
     });
+
+    describe('recover()',()=> {
+      let blockchain, existingWallet, existingPrivateKey
+    
+      beforeEach(() => {
+        blockchain = new Blockchain();
+        existingWallet = new Wallet();
+
+        transactionOne = new Wallet().createTransaction({
+          recipient: existingWallet.publicKey,
+          amount: 50
+        });
+
+        transactionTwo = new Wallet().createTransaction({
+          recipient: existingWallet.publicKey,
+          amount: 60
+        });
+
+        blockchain.addBlock({
+          data: [transactionOne, transactionTwo],
+          balance: existingWallet.balance,
+          address: existingWallet.publicKey
+        });
+
+      });
+
+      it('should recover the existing  wallet by using the private key ',()=>{
+        existingAddress = existingWallet.address;
+        existingbalance = Wallet.calculateBalance({
+          chain: blockchain.chain,
+          address: existingWallet.publicKey
+        });       
+        existingPrivateKey = existingWallet.keyPair.getPrivate('hex');
+
+
+        existingWallet = new Wallet();
+
+        existingWallet.recover({
+          chain: blockchain.chain ,
+          privateKey: existingPrivateKey
+        });
+
+        expect(existingAddress).toEqual(existingWallet.address);
+        expect(existingbalance).toEqual(existingWallet.balance);
+      })
+
+
+
+    })
 
 });

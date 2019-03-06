@@ -1,0 +1,29 @@
+<mat-list-item>
+    <mat-icon mat-list-icon>note</mat-icon>
+    <h3 mat-line><b>Id: {{id}}</b></h3>
+    <h4 mat-line>
+        <b>From:</b>
+        <input
+            matInput
+            type="text"
+            value="{{fromAddress}}"
+            class="address-form__input"
+            readonly>
+        <b>| Balance: {{fromAmount}}</b>
+    </h4>
+
+    
+    <h4 mat-line *ngFor="let item of outputMap | keyvalue">
+        <b>To:</b>
+        <input
+            matInput
+            type="text"
+            value="{{item.key}}"
+            class="address-form__input"
+            readonly>
+        <b>| Sent: {{item.value}}</b>
+    </h4>
+
+    <mat-divider></mat-divider>
+
+</mat-list-item>
