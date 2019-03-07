@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+*   {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        background-color: #338ecb;
+    }
+    .clearfix{
+        clear:both;
+    }
+    .header-sect{
+        padding-top:2em;
+        padding-bottom:2em;
+        padding-left:1em;
+        padding-right:1em;
+        color:#ffffff;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        vertical-align: middle;
+        background-color: #163d58;
+        overflow-y: auto;
+    }
+    .logo-container{
+        float:left;
+        width:40%;
+    }
+    .logo{
+        float:left;
+        border-radius:0.3em;
+        width:auto;
+        padding:0.25em;
+        text-align:center;
+        text-decoration: none;
+        line-height:auto;
+        color:#ffffff;
+        font-family: 'Tangerine', cursive;
+        font-size:3.6em;
+        font-weight: bold;
+    }
+    .logo:hover{
+        color: #338ecb;
+    }
+    .menu-container{
+        float:right;
+        width:60%;
+    }
+    .menu-item{
+        float:right;
+        border-radius:0.3em;
+        padding-top: 1.28em;
+        padding-bottom: 0.25em;
+        padding-left: 0.25em;
+        padding-right: 0.6em;
+        color:#338ecb;
+        width:6em;
+        text-align:center;
+        text-decoration:none;
+        line-height:auto;
+        font-size:1.68em;
+        font-weight: normal;
+    }
+    .menu-item:hover{
+        color:#ffffff;
+    }
