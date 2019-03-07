@@ -1,9 +1,7 @@
-// const Wallet = require('../wallet/index')
-const {blockchain, pubsub, wallet, transactionPool} = require('../network/index')
-// const wallet = new Wallet();
+const {blockchain, pubsub, wallet, transactionPool} = require('../backend/index')
 
 
-exports.transact = (req, res) => {
+exports.postTransact = (req, res) => {
     const {amount, recipient} = req.body;
 
     let transaction = transactionPool
@@ -27,9 +25,10 @@ exports.transact = (req, res) => {
 
     pubsub.broadcastTransaction(transaction);
 
-    // console.log('transactionPool', transactionPool);
-
     res.json({type: 'success',transaction})
+
+    // res.redirect('wallet-info');
+
 };
 
 exports.getTransactionMap = (req, res) => {

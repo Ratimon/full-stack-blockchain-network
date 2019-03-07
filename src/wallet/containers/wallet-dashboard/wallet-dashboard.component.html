@@ -1,0 +1,67 @@
+<h1>
+    My Wallet
+</h1>
+    
+<h2>
+    Real-time Dashboard
+</h2>
+
+  
+<mat-tab-group mat-align-tabs="center" dynamicHeight >
+
+
+  <mat-tab label="Send">
+    <div *ngIf="balance$ | async as balance">
+      <wallet-send
+        [balance]="balance"
+        (send)="onSend($event)">
+      </wallet-send>
+    </div>
+  </mat-tab>
+  
+  <mat-tab label="Receive">
+    <div *ngIf="balance$ | async as balance">
+      <wallet-receive
+        [balance]="balance"
+        [address]="address">
+      </wallet-receive>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Your Private Key">
+      <wallet-key [privateKey]="privateKey">
+  
+      </wallet-key>
+  </mat-tab>
+
+
+</mat-tab-group>
+
+<mat-divider></mat-divider>
+
+<mat-card
+  class="wallet-validate-card"
+  *ngIf="transactions$ | async as transactions">
+
+
+    <wallet-validate
+      [transactions]="transactions"
+      (validate)="onValidate($event)">
+    </wallet-validate>
+
+    <mat-card-title>
+        List of Transaction Pool
+    </mat-card-title>
+
+    <mat-card-content>
+
+      <mat-list>
+        <transaction-item
+          *ngFor="let transaction of transactions"
+          [transaction]="transaction">
+        </transaction-item>
+      </mat-list>
+
+    </mat-card-content>
+
+</mat-card>

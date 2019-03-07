@@ -1,21 +1,90 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { Routes, RouterModule } from '@angular/router';
 
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {
+  MatButtonModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatDialogModule
+} from '@angular/material';
+
+import {
+  StoreRouterConnectingModule,
+  RouterStateSerializer,
+} from '@ngrx/router-store';
+
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, effects, CustomSerializer } from './store/index';
+
+// not used in production
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { environment } from '../environments/environment'; // Angular CLI environment
+
+// interceptor
+import { ErrorInterceptor } from "./services/error-interceptor";
+
+// components
+import { AppComponent } from './containers/app/app.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ErrorComponent } from "./components/error/error.component";
+
+
+export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze]: [];
+
+export const ROUTES: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'wallet'
+  },
+  { path: 'wallet',
+    loadChildren: '../wallet/wallet.module#WalletModule'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }   
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NotFoundComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES),
+    StoreModule.forRoot(reducers, {metaReducers}),
+    EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule,
+    environment.development ? StoreDevtoolsModule.instrument() : [],
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatDialogModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomSerializer },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }

@@ -1,0 +1,33 @@
+<mat-card class="wallet-receive-card">
+
+    <mat-card-header>
+      <mat-icon>account_balance_wallet</mat-icon>
+      <mat-card-title><h2>
+          This is your address (or public key)
+        </h2></mat-card-title>
+      <mat-card-subtitle><h2>
+          Send this address to your sender
+        </h2></mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="container">
+        <h3>My Balance: {{balance}}</h3>
+        
+            <input
+              matInput
+              type="text"
+              value="{{address}}"
+              class="address-form__input"
+              readonly
+              #userinput>
+              
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="copyInputMessage(userinput)">
+              Copy to Clipboard
+            </button>
+        
+    </mat-card-content>
+
+</mat-card>
