@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+* {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background-color: #338ecb;
+  }
+  .clearfix{
+    clear:both;
+  }
+  .query-sect{
+    padding-top:2em;
+    padding-bottom:2em;
+    padding-left:1.8em;
+    padding-right:1.8em;
+    background-color:#ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    vertical-align: middle;
+    overflow-y: auto;
+  }
+  .query-span{
+    float: center;
+    border-radius:0.3em;
+    width: 10%;
+    padding: 0.6em 0.6em 0.6em 0.6em;
+    margin:1em 0.6em 1em 0.6em;
+    font-size:1em;
+    font-weight: normal;
+    text-align:right;
+    color:#ffffff;
+    background-color:#696f73;
+  }
+  .query-form{
+    float: center;
+    border-radius:0.3em;
+    width: 80%;
+    padding: 0.6em 1.2em 0.6em 1.2em;
+    font-size:1em;
+    font-weight: normal;
+    text-align:center;
+    color:#ffffff;
+    background-color:#696f73;
+  }
+  .query-input{
+    float: center;
+    width: 60%;
+    padding:0.6em 0.6em 0.6em 0.6em;
+    margin:1em 0 1em 0;
+    border-radius:0.3em;
+    color:#000000;
+    background-color:#ffffff;
+    border:none;
+    font-size: 1em;
+    text-align: left;
+    line-height:1.2em;
+  }
+  .query-button{
+    width: 2.4em;
+    background-color:#696f73;
+    border:none;
+    color:#ffffff;
+    border-radius:0.3em;
+    padding:0.3em;
+    margin:1em 0.6em 1em 0.6em;
+    font-size:1em;
+    text-align:center;
+    text-decoration: none;
+    line-height:1.2em;
+    vertical-align: middle;
+    cursor:pointer;
+  }
+  .query-button:hover{
+    background-color:#163d58;
+  }
+  .query-button:active{
+    background-color:#163d58;
+  }
