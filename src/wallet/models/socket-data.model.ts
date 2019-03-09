@@ -8,5 +8,6 @@ export enum Event {
 
 export interface Data {
     balance : number;
+    address :string
     transactionPoolMap : TransactionPool;
 }

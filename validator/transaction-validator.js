@@ -14,6 +14,7 @@ class TransactionValidator {
         const validTransactions = this.transactionPool.validTransactions();
 
         // generate the miner's reward
+        // console.log(this.wallet)
         validTransactions.push(
             Transaction.rewardTransaction({ validatorWallet: this.wallet })
         );

@@ -20,6 +20,10 @@ export class SocketService {
       this.socket = socketIo();
   }
 
+  public send(message: string): void {
+    this.socket.emit('message', message);
+}
+
 //   public onData(): Observable<Data> {
 //     return new Observable<Data>(observer => {
 //         this.socket.on('data', (data: Data) => observer.next(data));
@@ -46,6 +50,17 @@ export class SocketService {
         });
     });
   }
+
+//   public onAddress(): Observable<string> {
+//     return new Observable<string>(observer => {
+
+//         this.socket.on('data', (data: Data) => {
+//             const {address} = data;
+//             // console.log(address)
+//             observer.next(address);
+//         });
+//     });
+//   }
 
   public onEvent(event: Event): Observable<any> {
     return new Observable<Event>(observer => {

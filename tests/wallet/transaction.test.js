@@ -2,7 +2,8 @@ const Transaction = require('../../wallet/transaction');
 const Wallet = require('../../wallet/index');
 const {verifySignature} = require('../../util/index');
 
-const {REWARD_INPUT, REWARD} = require('../../wallet/config')
+let {REWARD_INPUT, REWARD} = require('../../wallet/config')
+REWARD=50
 
 describe('Transaction',()=>{
     let transaction, senderWallet, recipient, amount;

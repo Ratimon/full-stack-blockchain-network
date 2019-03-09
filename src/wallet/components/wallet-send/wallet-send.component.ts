@@ -3,7 +3,9 @@ import {
   Input,
   Output,
   OnInit,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
+
  } from '@angular/core';
 
 import {
@@ -14,6 +16,7 @@ import {
 
 @Component({
   selector: 'wallet-send',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './wallet-send.component.html',
   styleUrls: ['./wallet-send.component.scss']
 })

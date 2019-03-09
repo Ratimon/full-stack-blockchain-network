@@ -2,11 +2,13 @@ import {
   Component,
   Output,
   OnInit,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
   selector: 'wallet-create',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './wallet-create.component.html',
   styleUrls: ['./wallet-create.component.scss']
 })

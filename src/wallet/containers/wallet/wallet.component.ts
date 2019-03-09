@@ -21,14 +21,21 @@ export class WalletComponent implements OnInit {
 
   ngOnInit() {
     this.walletService.getWallet().subscribe(wallet=>{
+      localStorage.clear();
       console.log(wallet);
       this.wallet = wallet;
+      localStorage.setItem('currentAddress', JSON.stringify(this.wallet.address))
     })
   }
 
   onUse(event: Wallet) {
-      this.router.navigate([`/wallet/${this.wallet.address}`])
-    // })
+      // this.router.navigate([`/wallet/${this.wallet.address}`])
+      this.walletService.useWallet().subscribe((wallet)=>{
+        console.log('response', wallet);
+        // this.wallet = wallet;
+        // this.router.navigate([`/wallet/${this.wallet.address}`])
+        this.router.navigate([`/wallet/dashboard`])
+      });
   }
 
   onRecover(event: string) {
@@ -36,7 +43,8 @@ export class WalletComponent implements OnInit {
       this.walletService.recoverWallet(event).subscribe((wallet)=>{
         console.log('response', wallet);
         this.wallet = wallet;
-        this.router.navigate([`/wallet/${this.wallet.address}`])
+        // this.router.navigate([`/wallet/${this.wallet.address}`])
+        this.router.navigate([`/wallet/dashboard`])
       });
   }
 
@@ -44,7 +52,8 @@ export class WalletComponent implements OnInit {
       this.walletService.createWallet().subscribe((wallet)=>{
         console.log('response', wallet);
         this.wallet = wallet;
-        this.router.navigate([`/wallet/${this.wallet.address}`])
+        // this.router.navigate([`/wallet/${this.wallet.address}`])
+        this.router.navigate([`/wallet/dashboard`])
       })
   }
 

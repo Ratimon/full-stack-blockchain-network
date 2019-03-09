@@ -1,4 +1,9 @@
-import { Component,Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
   selector: 'wallet-key',
@@ -7,8 +12,7 @@ import { Component,Input, OnInit } from '@angular/core';
 })
 export class WalletKeyComponent implements OnInit {
 
-  hide: boolean = false;
-
+  hide: boolean = true;
   @Input() privateKey : string
 
   constructor() { }
