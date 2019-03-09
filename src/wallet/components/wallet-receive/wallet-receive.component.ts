@@ -1,7 +1,13 @@
-import { Component,Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy
+ } from '@angular/core';
 
 @Component({
   selector: 'wallet-receive',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './wallet-receive.component.html',
   styleUrls: ['./wallet-receive.component.scss']
 })

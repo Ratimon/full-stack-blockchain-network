@@ -2,30 +2,29 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
-import {Transaction} from '../../models/transaction.model';
+import {Transaction, OutputMap} from '../../models/transaction.model';
 
 @Component({
   selector: 'transaction-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './transaction-item.component.html',
   styleUrls: ['./transaction-item.component.scss']
 })
 export class TransactionItemComponent implements OnInit, OnChanges  {
 
   @Input() transaction: Transaction;
-  recipients: string[];
-  sentAmounts: number[];
   id: string;
-  fromAddress:string;
-  fromAmount:number;
-  outputMap;
+  fromAddress: string;
+  fromAmount: number;
+  outputMap: OutputMap;
 
   constructor() { }
 
   ngOnInit() {
-
   }
 
   ngOnChanges() {
@@ -33,13 +32,6 @@ export class TransactionItemComponent implements OnInit, OnChanges  {
     this.fromAddress=this.transaction.input.address;
     this.fromAmount=this.transaction.input.amount;
     this.outputMap=this.transaction.outputMap;
-    // this.recipients = Object.keys(this.transaction.outputMap)
-    // this.sentAmounts = Object.values(this.transaction.outputMap)
-
-    // console.log(this.fromAddress);
-    // console.log(this.fromAmount);
-    // console.log(this.outputMap); 
-    // console.log(this.recipients); 
   }
 
 }

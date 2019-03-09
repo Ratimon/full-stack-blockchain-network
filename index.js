@@ -10,8 +10,9 @@ const {blockchain, wallet, transactionPool} = require('./backend');
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`
 
+// const basicAuth = require('./middlewares/basic-auth');
 const explorerRoutes = require('./routes/explorer')
-const validatorRoutes = require('./routes/validator');
+const faucetRoutes = require('./routes/faucet');
 const walletRoutes = require('./routes/wallet')
 
 const app = express();
@@ -20,24 +21,12 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PATCH, DELETE, OPTIONS"
-//   );
-//   next();
-// });
-
+// api routes
 app.use(explorerRoutes);
-app.use(validatorRoutes);
 app.use(walletRoutes);
+app.use(faucetRoutes);
+
 
 const syncWithRootState = ()=> {
     request({ url:`${ROOT_NODE_ADDRESS}/explorer/blocks`}, (error, response, body)=>{
@@ -72,29 +61,20 @@ app.use('/', (req, res)=>{
     res.sendFile(path.join(__dirname, 'dist/blockchain/index.html'))
 });
 
+//socket.io
 io.on('connection', socket => {
     console.log('a user connected');
 
     setInterval(()=>{
-
-        let balance = Wallet.calculateBalance({ chain: blockchain.chain, address : wallet.publicKey });
-        // console.log("balance",balance)
+        let address = wallet.publicKey;
+        let balance = Wallet.calculateBalance({ chain: blockchain.chain, address });
         socket.emit('data', { balance, transactionPoolMap: transactionPool });     
     },2000)
 
-    // socket.emit('data', { balance: wallet.balance, transactionPool: transactionPool });
+
     socket.on('clientData', data => console.log(data));
     socket.on('disconnect', () => console.log('Client disconnected'));
 });
-
-
-// app.listen(PORT,()=>{
-//     console.log(`listening at localhost:${PORT}`)
-
-//     if(PORT !== DEFAULT_PORT ) {
-//         syncWithRootState();
-//     }
-// });
 
 server.listen(PORT,()=>{
     console.log(`listening at localhost:${PORT}`)
@@ -103,5 +83,3 @@ server.listen(PORT,()=>{
         syncWithRootState();
     }
 });
-
-// module.exports.PORT = PORT;

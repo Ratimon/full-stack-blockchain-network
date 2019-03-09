@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 
 import {
   MatFormFieldModule,
@@ -18,10 +18,12 @@ import {
 
 // components
 import * as fromComponents from './components';
-import { WalletDialogComponent } from './components/wallet-dialog/wallet-dialog.component';
 
 // containers
 import * as fromContainers from './containers';
+
+// guards
+import * as fromGuards from './guards';
 
 // services
 import * as fromServices from './services';
@@ -30,20 +32,15 @@ import * as fromServices from './services';
 export const ROUTES: Routes = [
   {
     path: '',
+    canActivate: [fromGuards.GuestGuard],
     component: fromContainers.WalletComponent,
   },
   {
-    path: ':address',
+    path: 'dashboard',
+    // path: ':address',
+    // canActivate: [fromGuards.AuthGuard],
     component: fromContainers.WalletDashboardComponent,
-  },
-  // {
-  //   path: 'create',
-  //   component: fromContainers.WalletDashboardComponent,
-  // },
-  // {
-  //   path: 'recover',
-  //   component: fromContainers.WalletDashboardComponent,
-  // },
+  }
 ];
 
 @NgModule({
@@ -62,14 +59,12 @@ export const ROUTES: Routes = [
     MatIconModule,
     MatDialogModule
   ],
-  providers: [...fromServices.services],
+  providers: [...fromServices.services, ...fromGuards.guards],
   declarations: [
     ...fromContainers.containers,
     ...fromComponents.components,
-    WalletDialogComponent
   ],
   entryComponents: [
-    WalletDialogComponent
   ],
 })
 export class WalletModule { }

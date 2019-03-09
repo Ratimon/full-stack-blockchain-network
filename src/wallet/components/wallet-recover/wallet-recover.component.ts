@@ -52,12 +52,7 @@ export class WalletRecoverComponent implements OnInit {
   }
 
   recoverWallet() {
-    // console.log(this.privateKeyControl.value)
-  //   const { value, valid } = form;
-  //   if(valid) {
       this.recover.emit(this.privateKeyControl.value);
-  //     console.log(value);
-  //   }
   }
 
 }

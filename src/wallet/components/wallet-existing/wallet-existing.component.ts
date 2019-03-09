@@ -3,13 +3,15 @@ import {
   Input,
   Output,
   OnInit,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Wallet } from '../../models/wallet.model';
 
 @Component({
   selector: 'wallet-existing',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './wallet-existing.component.html',
   styleUrls: ['./wallet-existing.component.scss']
 })

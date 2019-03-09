@@ -2,8 +2,6 @@ const Wallet = require('../wallet/index');
 const {blockchain} = require('../backend/index');
 let {wallet} = require('../backend/index');
 
-
-
 exports.getWallet = (req, res) => {
     const address = wallet.publicKey;
     const privateKey = wallet.keyPair.getPrivate('hex');
@@ -17,7 +15,7 @@ exports.getWallet = (req, res) => {
   }
 
 exports.postRecoverWallet = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
      const {privateKey} = req.body;
      wallet.recover({ chain: blockchain.chain, privateKey});
 

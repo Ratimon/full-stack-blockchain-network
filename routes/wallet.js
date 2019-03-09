@@ -15,7 +15,7 @@ router.post('/wallet/create', walletController.postCreateWallet)
 
 router.post('/wallet/transact', transactionController.postTransact);
 
-router.post('/wallet/validate', validatorController.postValidateBlock);
+// router.post('/wallet/validate', validatorController.postValidateBlock);
 
 router.get('/wallet/validate-transactions', validatorController.getValidateTransactions);
 

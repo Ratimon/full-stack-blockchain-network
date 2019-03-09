@@ -31,7 +31,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment'; // Angular CLI environment
 
 // interceptor
-import { ErrorInterceptor } from "./services/error-interceptor";
+import { ErrorInterceptor } from "./helpers/error-interceptor";
+// import {BasicAuthInterceptor} from "./helpers/basic-auth-interceptor"
 
 // components
 import { AppComponent } from './containers/app/app.component';
@@ -82,6 +83,7 @@ export const ROUTES: Routes = [
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomSerializer },
+    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
