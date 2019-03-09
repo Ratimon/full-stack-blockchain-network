@@ -1,18 +1,12 @@
 <div class="report-sect">
   <div class="block-list">
       <div>Latest blocks</div>
-      <div class="block-card">
+      <li class="block-card" *ngFor="let block of blockchain" (click)=onSelect(block)>
           <span class="block-button">Bk</span>
-          <span class="block-number">789123</span>
-          <span>miner:</span>
-          <span class="block-miner">55556666</span>
-      </div>
-      <div class="block-card">
-          <span class="block-button">Bk</span>
-          <span class="block-number">789123</span>
-          <span>miner:</span>
-          <span class="block-miner">55556666</span>
-      </div>
+          <span class="block-number">{{block.index}}</span>
+          <span>minter:</span>
+          <span class="block-miner">{{block.minterAddress}}</span>
+      </li>
   </div>
   <div class="transaction-list">
       <div>Latest transactions</div>
