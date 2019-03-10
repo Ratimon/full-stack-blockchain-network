@@ -2,7 +2,8 @@ const Wallet = require('../../wallet/index')
 const Transaction = require('../../wallet/transaction')
 const {verifySignature} = require('../../util/index');
 const Blockchain = require('../../model/blockchain');
-const {STARTING_BALANCE} = require('../../wallet/config');
+let {STARTING_BALANCE} = require('../../wallet/config');
+STARTING_BALANCE = 1000
 
 describe('Wallet',()=>{
     let wallet;

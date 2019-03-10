@@ -14,7 +14,6 @@ class TransactionValidator {
         const validTransactions = this.transactionPool.validTransactions();
 
         // generate the miner's reward
-        // console.log(this.wallet)
         validTransactions.push(
             Transaction.rewardTransaction({ validatorWallet: this.wallet })
         );
@@ -22,10 +21,7 @@ class TransactionValidator {
         // add a block consisting of these transactions to the blockchain
         const address = this.wallet.publicKey;
         const balance = Wallet.calculateBalance({chain: this.blockchain.chain, address});
-        
         this.blockchain.addBlock({ data : validTransactions, balance, address  });
-        // this.blockchain.addBlock({ data : validTransactions  });
-
 
         // broadcast the updated blockchain
         this.pubsub.broadcastChain();

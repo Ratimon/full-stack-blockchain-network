@@ -2,28 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { HttpClientModule } from '@angular/common/http';
 
 import {
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
-  MatDividerModule,
-  MatListModule,
-  MatTabsModule,
   MatButtonModule,
   MatIconModule,
-  // MatDialogModule
 } from '@angular/material';
-
-// components
-import * as fromComponents from './components';
 
 // containers
 import * as fromContainers from './containers';
 
-// guards
-import * as fromGuards from './guards';
+// components
+import * as fromComponents from './components';
 
 // services
 import * as fromServices from './services';
@@ -32,12 +24,7 @@ import * as fromServices from './services';
 export const ROUTES: Routes = [
   {
     path: '',
-    canActivate: [fromGuards.GuestGuard],
-    component: fromContainers.WalletComponent,
-  },
-  {
-    path: 'dashboard',
-    component: fromContainers.WalletDashboardComponent,
+    component: fromContainers.FaucetComponent,
   }
 ];
 
@@ -50,19 +37,13 @@ export const ROUTES: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatDividerModule,
-    MatListModule,
-    MatTabsModule,
     MatButtonModule,
-    MatIconModule,
-    // MatDialogModule
+    MatIconModule,    
   ],
-  providers: [...fromServices.services, ...fromGuards.guards],
+  providers: [...fromServices.services],
   declarations: [
     ...fromContainers.containers,
-    ...fromComponents.components,
-  ],
-  entryComponents: [
-  ],
+    ...fromComponents.components
+  ]
 })
-export class WalletModule { }
+export class FaucetModule { }

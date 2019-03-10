@@ -7,11 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import {
-  MatButtonModule,
-  MatSidenavModule,
-  MatListModule,
-  MatIconModule,
-  MatToolbarModule,
   MatDialogModule
 } from '@angular/material';
 
@@ -51,6 +46,9 @@ export const ROUTES: Routes = [
   { path: 'wallet',
     loadChildren: '../wallet/wallet.module#WalletModule'
   },
+  { path: 'faucet',
+  loadChildren: '../faucet/faucet.module#FaucetModule'
+},
   {
     path: '**',
     component: NotFoundComponent,
@@ -58,11 +56,6 @@ export const ROUTES: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    ErrorComponent
-  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -74,17 +67,16 @@ export const ROUTES: Routes = [
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     environment.development ? StoreDevtoolsModule.instrument() : [],
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatToolbarModule,
     MatDialogModule
   ],
   providers: [
     { provide: RouterStateSerializer, useClass: CustomSerializer },
-    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  declarations: [
+    AppComponent,
+    NotFoundComponent,
+    ErrorComponent
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]

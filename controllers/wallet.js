@@ -15,12 +15,9 @@ exports.getWallet = (req, res) => {
   }
 
 exports.postRecoverWallet = (req, res) => {
-    // console.log(req.body);
      const {privateKey} = req.body;
      wallet.recover({ chain: blockchain.chain, privateKey});
 
-    //  console.log(wallet.keyPair);
-    //  console.log(wallet.publicKey);
     res.json({
       address: wallet.publicKey,
       balance: wallet.balance
@@ -28,10 +25,8 @@ exports.postRecoverWallet = (req, res) => {
   }
 
   exports.postCreateWallet = (req, res) => {
-
     wallet = new Wallet()
-    //  console.log(wallet.keyPair);
-    //  console.log(wallet.publicKey);
+
     res.json({
       address: wallet.publicKey,
       balance: wallet.balance
