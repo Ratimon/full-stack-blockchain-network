@@ -12,6 +12,33 @@
     .clearfix{
         clear:both;
     }
+
+    .back-button{
+        float:left;
+        margin:0.3em;
+        border-radius: 1em 0em 0em 1em;
+        padding: 0.3em;
+        width: 3.8em;
+        color: #ffffff;
+        font-size: 1em;
+        text-align: center;
+        background-color: #696f73;
+        cursor: pointer;
+    }
+
+    .next-button{
+        float: right;
+        margin:0.3em;
+        border-radius: 0em 1em 1em 0em;
+        padding: 0.3em;
+        width: 3.8em;
+        color: #ffffff;
+        font-size: 1em;
+        text-align: center;
+        background-color: #696f73;
+        cursor: pointer;
+    }
+
     .report-sect{
         padding-top:2em;
         padding-bottom:2em;
@@ -32,14 +59,16 @@
         padding-right:0.6em;
         color: #000000;
         background-color:#ffffff;
-        font-size:0.8em;
+        font-size: 1em;
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
         vertical-align: middle;
         line-height: auto;
     }
     .block-card{
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        width: 98%;
         padding-top:0.6em;
         padding-bottom:0.6em;
         padding-left:0.6em;
@@ -47,26 +76,31 @@
         list-style-type: none;
         color:#000000;
         font-size: 1em;
+        word-break: break-all;
         border-bottom: #b6c0c6;
     }
     .block-number{
+        width: auto;
         padding-left: 0.3em;
         padding-right: 0.8em;
         color:#338ecb;
         font-size: 1em;
     }
-    .block-miner{
+    .block-minter{
+        display: flex;
+        width: auto;
         padding-left: 0.3em;
         padding-right: 0.8em;
         color:#338ecb;
-        font-size: 0.8em;
+        font-size: 1em;
     }
     .block-button{
         margin:0.3em;
         border-radius: 0.3em;
         padding: 0.3em;
-        width: 2em;
+        width: 2.0em;
         color: #ffffff;
+        font-size: 1em;
         background-color: #696f73;
     }
     .transaction-list{
@@ -78,26 +112,30 @@
         padding-right:0.6em;
         color: #000000;
         background-color:#ffffff;
-        font-size:1em;
+        font-size:0.8em;
         font-family: 'Roboto', sans-serif;
         font-weight: bold;
         vertical-align: middle;
         line-height: auto;
     }
     .transaction-card{
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        width: 98%;
         padding-top:0.6em;
         padding-bottom:0.6em;
         padding-left:0.6em;
         padding-right:0.6em;
         color: #000000;
+        font-size: 1em;
         border-bottom: #b6c0c6; 
     }
     .transaction-button{
         margin: 0.3em;
         border-radius: 0.8em;
         padding: 0.3em;
-        width: 2em;
+        width: 2.0em;
+        font-size: 1em;
         color: #ffffff;
         background-color: #696f73;
     }
@@ -108,14 +146,18 @@
         font-size: 1em;
     }
     .transaction-from{
+        display: flex;
         padding-left: 0.3em;
         padding-right: 0.8em;
         color:#338ecb;
         font-size: 1em;
+        word-break: break-all;
     }
     .transaction-to{
+        display: flex;
         padding-left: 0.3em;
         padding-right: 0.8em;
         color:#338ecb;
         font-size: 1em;
+        word-break: break-all;
     }

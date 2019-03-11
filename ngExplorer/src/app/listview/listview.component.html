@@ -1,30 +1,34 @@
 <div class="report-sect">
   <div class="block-list">
-      <div>Latest blocks</div>
-      <li class="block-card" *ngFor="let block of blockchain" (click)=onSelect(block)>
-          <span class="block-button">Bk</span>
-          <span class="block-number">{{block.index}}</span>
-          <span>minter:</span>
-          <span class="block-miner">{{block.minterAddress}}</span>
+      <div>
+        <span class="back-button" (click)=onBackBlock()>Back</span>
+        <span class="next-button" (click)=onNextBlock()>Next</span>
+      </div>
+      <li class="block-card" *ngFor="let block of displayBlkList" (click)=onSelectBlock(block)>
+        <span class="block-button">Bk</span>
+        <span class="block-number">{{block.index}}</span>
+        <span>minter balance: </span>
+        <span class="block-minter">{{block.minterBalance}}</span>
+        <span>minter address: </span>
+        <span class="block-minter">{{block.minterAddress}}</span>
       </li>
   </div>
   <div class="transaction-list">
-      <div>Latest transactions</div>
-      <div class="transaction-card">
-          <span class="transaction-button">Tx</span>
-          <span class="transaction-id">987654321</span>
-          <span>from:</span>
-          <span class="transaction-from">77778888</span>
-          <span>to:</span>
-          <span class="transaction-to">88889999</span>
+      <div>
+        <span class="back-button" (click)=onBackTx()>Back</span>
+        <span class="next-button" (click)=onNextTx()>Next</span>
       </div>
-      <div class="transaction-card">
-          <span class="transaction-button">Tx</span>
-          <span class="transaction-id">987654321</span>
-          <span>from:</span>
-          <span class="transaction-from">77778888</span>
-          <span>to:</span>
-          <span class="transaction-to">88889999</span>
+      <div class="transaction-card" *ngFor="let transaction of displayTxList" (click)=onSelectTransaction(transaction)>
+        <span class="transaction-button">Tx</span>
+        <span class="transaction-id">{{transaction.id}}</span>
+        <span>from: </span>
+        <span class="transaction-from">{{transaction.input.address}}</span>
+        <div *ngFor="let outputMap of transaction.outputMap | keyvalue">
+          <span>to: </span>
+          <span class="transaction-to">{{outputMap.key}} </span>
+          <span>amount: </span>
+          <span class="transaction-to">{{outputMap.value}}</span>
+        </div>
       </div>
   </div>
 </div>

@@ -1,11 +1,12 @@
+import { Transaction, OutputMap, Input, Signature } from './model/transaction';
 import { Block } from './model/block';
 import { Blockchain } from './model/blockchain';
 
-export const BLOCKCHAIN: Blockchain = [
+export const BLOCKCHAIN: Block[] = [
     {index: 0,
     hash: 'hash-one',
     previousHash: '-----',
-    timestamp: '2016-07-27T05:30:00.000Z',
+    timestamp: Date.parse('2016-07-27T05:30:00.000Z'),
     data: [],
     difficulty: 1,
     minterBalance: 10000,
