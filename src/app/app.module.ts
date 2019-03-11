@@ -27,7 +27,6 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 
 // interceptor
 import { ErrorInterceptor } from "./helpers/error-interceptor";
-// import {BasicAuthInterceptor} from "./helpers/basic-auth-interceptor"
 
 // components
 import { AppComponent } from './containers/app/app.component';
@@ -48,7 +47,10 @@ export const ROUTES: Routes = [
   },
   { path: 'faucet',
   loadChildren: '../faucet/faucet.module#FaucetModule'
-},
+  },
+  { path: 'explorer',
+  loadChildren: '../explorer/explorer.module#ExplorerModule'
+  },
   {
     path: '**',
     component: NotFoundComponent,
@@ -76,7 +78,7 @@ export const ROUTES: Routes = [
   declarations: [
     AppComponent,
     NotFoundComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]

@@ -11,6 +11,8 @@ router.get('/explorer/blocks', blockchainController.getBlocks);
 
 router.get('/explorer/blocks/:blockId', blockchainController.getBlock);
 
+router.get('/explorer/transactions', transactionController.getConfirmedTransaction);
+
 router.get('/explorer/transaction-pool-map', transactionController.getTransactionMap);
 
 

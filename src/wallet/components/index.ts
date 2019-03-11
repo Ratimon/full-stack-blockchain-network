@@ -1,4 +1,3 @@
-import { TransactionItemComponent } from './transaction-item/transaction-item.component';
 import { WalletExistingComponent } from './wallet-existing/wallet-existing.component';
 import { WalletKeyComponent } from './wallet-key/wallet-key.component'
 import { WalletReceiveComponent } from './wallet-receive/wallet-receive.component';
@@ -9,7 +8,6 @@ import { WalletValidateComponent } from './wallet-validate/wallet-validate.compo
 
 
 export const components: any[] = [
-    TransactionItemComponent,
     WalletExistingComponent,
     WalletKeyComponent,
     WalletRecoverComponent,
@@ -19,7 +17,6 @@ export const components: any[] = [
     WalletValidateComponent
 ];
 
-export * from './transaction-item/transaction-item.component';
 export * from './wallet-existing/wallet-existing.component';
 export * from './wallet-key/wallet-key.component';
 export * from './wallet-recover/wallet-recover.component';

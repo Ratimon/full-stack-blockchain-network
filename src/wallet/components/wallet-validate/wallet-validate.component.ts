@@ -1,6 +1,6 @@
 import {
   Component,
-  Input,
+  // Input,
   Output,
   OnInit,
   EventEmitter,
@@ -17,7 +17,7 @@ import { Transaction } from '../../models/transaction.model';
 })
 export class WalletValidateComponent implements OnInit {
 
-  @Input() transactions: Transaction[];
+  // @Input() transactions: Transaction[];
   @Output() validate : EventEmitter<any> = new EventEmitter();
   
   constructor() { }
