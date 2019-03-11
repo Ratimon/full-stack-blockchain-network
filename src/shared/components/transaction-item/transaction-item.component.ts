@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import {Transaction, OutputMap} from '../../models/transaction.model';
+import {Transaction, OutputMap} from '../../model/transaction.model';
 
 @Component({
   selector: 'transaction-item',

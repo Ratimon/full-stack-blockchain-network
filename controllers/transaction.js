@@ -1,5 +1,24 @@
 const {blockchain, pubsub, wallet, transactionPool, faucetWallet} = require('../backend/index');
-// const TransactionValidator = require('../validator/transaction-validator')
+
+exports.getTransactionMap = (req, res) => {
+
+    res.json(transactionPool.transactionMap)
+};
+
+exports.getConfirmedTransaction = (req, res) => {
+
+    let transactions = []
+
+    for (let i=blockchain.chain.length-1; i>-1; i--) {
+        const block = blockchain.chain[i];
+
+        for (let transaction of block.data.reverse()) {
+            transactions.push(transaction);
+        }
+    }
+
+    res.json(transactions);
+};
 
 exports.postTransact = (req, res) => {
     const {amount, recipient} = req.body;
@@ -31,11 +50,6 @@ exports.postTransact = (req, res) => {
 
 };
 
-exports.getTransactionMap = (req, res) => {
-    res.json(transactionPool.transactionMap)
-};
-
-
 exports.postRequest = (req, res) => {
     // const recipient = '049d8f88d66b9f746bfbc42ddbee2b78096c37be9070716bf26e1bea8f501b2c6adb22a8a05f0bcc934db114cf26ad61ee50d70ad9551713014e618690e4d4adae'
     // console.log(req.body)
@@ -61,10 +75,6 @@ exports.postRequest = (req, res) => {
 
     transactionPool.setTransaction(transaction);
     pubsub.broadcastTransaction(transaction);
-
-    // const faucettransactionValidator =  new TransactionValidator({ blockchain, transactionPool, wallet: faucetWallet, pubsub});
-
-    // faucettransactionValidator.validateTransaction();
 
     res.json(transactionPool.transactionMap);   
 

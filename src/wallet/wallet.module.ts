@@ -2,18 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { HttpClientModule } from '@angular/common/http';
+
+import {SharedModule} from '../shared/shared.module'
 
 import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatCardModule,
-  MatDividerModule,
-  MatListModule,
+  // MatFormFieldModule,
   MatTabsModule,
   MatButtonModule,
-  MatIconModule,
-  // MatDialogModule
 } from '@angular/material';
 
 // components
@@ -43,19 +38,13 @@ export const ROUTES: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild(ROUTES),
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatDividerModule,
-    MatListModule,
+    // MatFormFieldModule,
     MatTabsModule,
     MatButtonModule,
-    MatIconModule,
-    // MatDialogModule
   ],
   providers: [...fromServices.services, ...fromGuards.guards],
   declarations: [

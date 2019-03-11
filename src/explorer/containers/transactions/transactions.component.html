@@ -1,0 +1,46 @@
+<mat-form-field class="search-form-field">
+    <input
+    matInput
+    type="text"
+    placeholder="Enter sender or recipient' address to filter transaction"
+    [(ngModel)]="searchText">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+<div class="main">
+
+  <mat-card
+    class="confirmed-transactions-card center"
+    *ngIf="transactions$ | async as transactions">
+
+    <mat-card-title>
+        List of Confirmed Transactions
+    </mat-card-title>
+
+    <mat-card-content>
+
+      <mat-list>
+        <transaction-item
+          *ngFor="let transaction of transactions | keyvaluefilterslice : searchText : lowValue : highValue"
+          [transaction]="transaction">
+        </transaction-item>
+      </mat-list>
+
+    </mat-card-content>
+
+    <mat-paginator
+  [length]="transactions.length"
+  [pageSize]="pageSize"
+  (page)="pageEvent = getPaginatorData($event)">
+</mat-paginator>
+
+</mat-card>
+
+</div>
+
+
+
+
+
