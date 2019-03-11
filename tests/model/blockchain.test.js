@@ -1,9 +1,9 @@
 const Blockchain = require('../../model/blockchain');
 const Block = require('../../model/block');
 const Transaction = require('../../wallet/transaction')
-const cryptoHash = require('../../util/crypto-hash');
+// const cryptoHash = require('../../util/crypto-hash');
 const Wallet = require('../../wallet/index');
-let {REWARD_INPUT} = require('../../wallet/config')
+// let {REWARD_INPUT} = require('../../wallet/config')
 
 describe('Blockchain', ()=>{
     ////

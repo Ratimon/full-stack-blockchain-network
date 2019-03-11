@@ -1,0 +1,54 @@
+<mat-card class="faucet-request-card">
+
+    <mat-card-header>
+      <mat-icon>account_box</mat-icon>
+      <mat-card-title><h2>
+          Request Money
+        </h2></mat-card-title>
+      <mat-card-subtitle><h2>
+          By simply enter the recipient address
+        </h2></mat-card-subtitle>
+    </mat-card-header>
+
+    <form [formGroup]="form">
+
+      <mat-card-content class="container">
+            <mat-form-field>
+                
+                <input
+                  matInput
+                  placeholder="Enter the Recipient's address"
+                  type="text"
+                  formControlName="recipient"
+                  class="recipient-form__input"
+                  [class.error]="recipientControlInvalid">
+
+                <div
+                  class="recipient-form__error"
+                  *ngIf="recipientControlInvalid">
+                  <p>You must have an address to request money</p>
+                </div>
+
+                <div
+                  class="recipient-form__error"
+                  *ngIf="recipientControlLengthInvalid">
+                  <p>The address is invalid</p>
+                </div>
+
+            </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-card-actions class="main">
+        <button
+          mat-raised-button
+          class="center"
+          color="primary"
+          (click)="requestValue()">
+          Request
+        </button>
+      </mat-card-actions>
+
+    </form>
+
+</mat-card>

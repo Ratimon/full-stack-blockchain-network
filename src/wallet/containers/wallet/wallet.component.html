@@ -1,26 +1,30 @@
 <h1>
-  Select your Wallet
+    Select your Wallet
 </h1>
 
-<mat-tab-group mat-align-tabs="center" dynamicHeight >
+<div class="main">
 
-  <mat-tab label="Option 1: Use the Wallet We Created">
-    <wallet-existing [wallet]="wallet" (use)="onUse($event)">
+  <mat-tab-group class = "center" mat-align-tabs="center" dynamicHeight >
 
-    </wallet-existing>
-  </mat-tab>
-  
+    <mat-tab label="Option 1: Use the Wallet We Created">
+      <wallet-existing [wallet]="wallet" (use)="onUse($event)">
 
-  <mat-tab label="Option 2: Recover an Existing Wallet">
-      <wallet-recover (recover)="onRecover($event)">
+      </wallet-existing>
+    </mat-tab>
+    
 
-      </wallet-recover>
-  </mat-tab>
+    <mat-tab label="Option 2: Recover an Existing Wallet">
+        <wallet-recover (recover)="onRecover($event)">
 
-  <mat-tab label="Option 3: Create a New Wallet">
-      <wallet-create (create)="onCreate($event)">
+        </wallet-recover>
+    </mat-tab>
 
-      </wallet-create>
-  </mat-tab>
+    <mat-tab label="Option 3: Create a New Wallet">
+        <wallet-create (create)="onCreate($event)">
 
-</mat-tab-group>
+        </wallet-create>
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>
