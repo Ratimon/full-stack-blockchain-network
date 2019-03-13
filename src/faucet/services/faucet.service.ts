@@ -1,7 +1,7 @@
+
+import {throwError as observableThrowError,  Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { Observable} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class FaucetService {
     const recipient = {recipient: payload}
     return this.http
       .post<string>(`/faucet/request`, recipient)
-      .pipe(catchError((error: any) => Observable.throw(error.json())));
+      .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
 
 

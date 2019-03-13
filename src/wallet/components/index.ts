@@ -23,6 +23,6 @@ export * from './wallet-recover/wallet-recover.component';
 export * from './wallet-receive/wallet-receive.component';
 export * from './wallet-create/wallet-create.component';
 export * from './wallet-send/wallet-send.component';
-export * from './wallet-validate/wallet-validate.component'
+export * from './wallet-validate/wallet-validate.component';
 
 

@@ -7,13 +7,13 @@ const transactionController = require('../controllers/transaction');
 
 const router = express.Router();
 
-router.get('/explorer/blocks', blockchainController.getBlocks);
+router.get('/explorer/api/blocks', blockchainController.getBlocks);
 
-router.get('/explorer/blocks/:blockId', blockchainController.getBlock);
+router.get('/explorer/api/blocks/:blockId', blockchainController.getBlock);
 
-router.get('/explorer/transactions', transactionController.getConfirmedTransaction);
+router.get('/explorer/api/transactions', transactionController.getConfirmedTransaction);
 
-router.get('/explorer/transaction-pool-map', transactionController.getTransactionMap);
+router.get('/explorer/api/transaction-pool-map', transactionController.getTransactionMap);
 
 
 

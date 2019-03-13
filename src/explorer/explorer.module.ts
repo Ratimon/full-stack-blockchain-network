@@ -1,13 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-// import {ScrollingModule} from '@angular/cdk/scrolling';
-
 import {SharedModule} from  '../shared/shared.module'
-
-import {FilterAddressPipe} from './pipes/filter-address.pipe'
-import {FilterAddressSlicePipe} from './pipes/filter-address-slice.pipe'
-
 
 import {
   // MatFormFieldModule,
@@ -16,20 +10,26 @@ import {
   MatPaginatorModule
 } from '@angular/material';
 
+import {ScrollingModule} from '@angular/cdk/scrolling';
+
 // containers
 import * as fromContainers from './containers';
 
 // components
+import { BlockItemComponent } from './components/block-item/block-item.component';
 
 // services
 import * as fromServices from './services';
+
+// pipes
+import * as fromPipes from './pipes';
 
 // routes
 export const ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'transactions'
+    redirectTo: 'blocks'
   },
   {
     path: 'accounts',
@@ -48,20 +48,20 @@ export const ROUTES: Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(ROUTES),
-    // ScrollingModule,
+    ScrollingModule,
     SharedModule,
     MatButtonModule,
     MatPaginatorModule
   ],
   providers: [
     ...fromServices.services,
-    FilterAddressPipe
+    ...fromPipes.providerPipes
   ]
     ,
   declarations: [
     ...fromContainers.containers,
-    FilterAddressPipe,
-    FilterAddressSlicePipe
+    ...fromPipes.customScrollPipes,
+    BlockItemComponent
   ]
 })
 export class ExplorerModule { }

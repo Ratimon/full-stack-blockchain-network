@@ -3,18 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import {throwError as observableThrowError,  Observable } from 'rxjs';
 
-import { Transaction } from '../models/transaction.model'
+import { Block } from '../models/block.model'
 
 @Injectable()
-export class TransactionService {
+export class BlockService {
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getTransactions(): Observable<Transaction[]> {
+  getBlocks(): Observable<Block[]> {
     return this.http
-      .get<Transaction[]>(`/explorer/api/transactions`)
+      .get<Block[]>(`/explorer/api/blocks`)
       .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
 

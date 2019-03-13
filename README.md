@@ -14,7 +14,6 @@ Run `ng run dev` for a dev server. Navigate to `http://localhost:3000/`. The app
 
 Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port specified in the terminal. The app will automatically reload if you change any of the source files. It also syncs the chain via the redis channel
 
-
 ## Use the Wallet
 
  Navigate to `http://localhost:3000/wallet` or other peer port specified in the terminal
@@ -24,6 +23,8 @@ Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port 
  ## Request the money
 
  Navigate to `http://localhost:3000/faucet` to request the testing money.
+
+ ## Explorers
 
  ### TODO
 
@@ -37,6 +38,7 @@ Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port 
 - [ ] Load the Blockchain from the File System:
 - [x] Real-tine Transaction Pool Socket Updates
 - [ ] Ngrx to solve overdone API fetch on smaller component
+- [ ] Upgrade to Angular 7 and use Scrolling Module(from Angular Material)
 - [ ] Fresh Keys Per Transaction: create a new private key on every new transaction
 - [ ] Redis Clusters
 - [ ] Refactor Backend with Go Programming

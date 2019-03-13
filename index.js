@@ -29,7 +29,7 @@ app.use(faucetRoutes);
 
 
 const syncWithRootState = ()=> {
-    request({ url:`${ROOT_NODE_ADDRESS}/explorer/blocks`}, (error, response, body)=>{
+    request({ url:`${ROOT_NODE_ADDRESS}/explorer/api/blocks`}, (error, response, body)=>{
         if(!error && response.statusCode === 200) {
             const rootChain = JSON.parse(body);
 
@@ -38,7 +38,7 @@ const syncWithRootState = ()=> {
         }
     });
 
-    request({ url:`${ROOT_NODE_ADDRESS}/explorer/transaction-pool-map`}, (error, response, body)=>{
+    request({ url:`${ROOT_NODE_ADDRESS}/explorer/api/transaction-pool-map`}, (error, response, body)=>{
         if(!error && response.statusCode === 200) {
             const rootTransactionPoolMap = JSON.parse(body);
 
