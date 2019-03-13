@@ -25,6 +25,8 @@ export class BlockItemComponent implements OnInit {
   minterBalance: number;
   minterAddress: string;
 
+  panelOpenState = false;
+
   constructor() { }
 
   ngOnInit() {

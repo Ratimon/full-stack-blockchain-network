@@ -1,0 +1,23 @@
+h3 {
+    overflow-x: auto; /* Use horizontal scroller if needed */
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    white-space : normal;
+}
+
+.address-form {
+  
+    &__input {
+      border: 0;
+      margin: 0;
+      padding: 5px;
+      outline: 0;
+      width: 500px;
+      border-radius: 0px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #f5f5f5;
+      border: 1px solid transparent;
+    }
+  }

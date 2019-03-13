@@ -1,5 +1,5 @@
 .center{
-    width: 85%;
+    width: 95%;
     margin: 5px auto;
   }
   
@@ -23,7 +23,7 @@
   }
 
 .validated-blocks-card {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 
@@ -43,6 +43,6 @@ cdk-virtual-scroll-viewport {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgb(238, 169, 79);
+    background-color: rgb(72,66,183);
   }
 }

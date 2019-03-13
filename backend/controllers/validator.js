@@ -1,4 +1,5 @@
-const { transactionPool, transactionValidator} = require('../backend/index');
+// const { transactionPool, transactionValidator} = require('../backend/index');
+const { transactionPool, transactionValidator} = require('../network/index');
 
 
 exports.getValidateTransactions = (req, res) => {

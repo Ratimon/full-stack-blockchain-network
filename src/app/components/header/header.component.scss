@@ -1,0 +1,41 @@
+a {
+    text-decoration: none;
+    color: rgb(72,66,183);
+}
+ 
+a:hover, a:active{
+    color: rgb(72,66,183);
+}
+
+ 
+a:hover, a:active{
+    color: rgb(72,66,183);
+}
+ 
+.navigation-items{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+mat-toolbar{
+    border-radius: 3px;
+}
+
+mat-toolbar a {
+    text-decoration: none;
+    color: white;
+}
+mat-toolbar a:hover, a:active{
+    color: whitesmoke;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+  }
+ 
+@media(max-width: 959px){
+    mat-toolbar{
+        border-radius: 0px;
+    }
+}

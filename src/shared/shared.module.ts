@@ -7,9 +7,11 @@ import { FormsModule } from '@angular/forms';
 import {
   MatFormFieldModule,
   MatInputModule,
+  MatMenuModule,
   MatCardModule,
   MatDividerModule,
   MatListModule,
+  MatButtonModule,
   MatIconModule,
 } from '@angular/material';
 
@@ -21,9 +23,11 @@ import * as fromComponents from './components';
     CommonModule,
     FormsModule,
     MatInputModule,
+    MatMenuModule,
     MatCardModule,
     MatDividerModule,
     MatListModule,
+    MatButtonModule,
     MatIconModule,
   ],
   exports:[
@@ -32,9 +36,11 @@ import * as fromComponents from './components';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     MatCardModule,
     MatDividerModule,
     MatListModule,
+    MatButtonModule,
     MatIconModule,
   ],
   declarations: [

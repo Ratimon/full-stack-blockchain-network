@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filteraddress'
+  name: 'filtertransaction'
 })
-export class FilterAddressPipe implements PipeTransform {
+export class FilterTransactionPipe implements PipeTransform {
 
   constructor(
   ) {}

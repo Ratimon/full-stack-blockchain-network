@@ -1,6 +1,21 @@
-  <div class="page-wrap">
-    <main class="content">
-      <router-outlet></router-outlet>
-    </main>
-  </div>
+<!-- <div class="page-wrap"> -->
+
+  <mat-sidenav-container>
+
+    <mat-sidenav #sidenav role="navigation">
+        <sidenav-list (sidenavClose)="sidenav.close()"></sidenav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      
+      <header (sidenavToggle)="sidenav.toggle()"></header>
+
+      <!-- <main class="content"> -->
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+<!-- </div> -->
 
