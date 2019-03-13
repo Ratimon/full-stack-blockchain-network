@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TransactionService} from '../../services/transaction.service'
 
 import { Observable } from 'rxjs';
 
-import {Transaction} from '../../models/transaction.model'
+import { TransactionService} from '../../services/transaction.service'
 
-// import {TransactionItemComponent} from '../../../app/components/transaction-item/transaction-item.component'
+import {Transaction} from '../../models/transaction.model'
 
 @Component({
   selector: 'transactions',
@@ -18,11 +17,9 @@ export class TransactionsComponent implements OnInit {
   transactions$: Observable<Transaction[]>;
 
   pageIndex:number = 0;
-  pageSize:number = 3;
+  pageSize:number = 10;
   lowValue:number = 0;
-  highValue:number = 3;
-
-  // pageSizeOptions: number[] = [5, 10, 25, 100];
+  highValue:number = 10;
 
   constructor(
     private transactionService :TransactionService,

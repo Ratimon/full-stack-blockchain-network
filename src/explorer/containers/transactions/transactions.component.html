@@ -1,13 +1,18 @@
+<h1>
+  List of Confirmed Transactions
+</h1>
+
 <mat-form-field class="search-form-field">
     <input
-    matInput
-    type="text"
-    placeholder="Enter sender or recipient' address to filter transaction"
-    [(ngModel)]="searchText">
+      matInput
+      type="text"
+      placeholder="Enter sender or recipient' address to filter transaction"
+      [(ngModel)]="searchText">
+
     <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-form-field>
+</mat-form-field>
 
 <div class="main">
 
@@ -15,32 +20,27 @@
     class="confirmed-transactions-card center"
     *ngIf="transactions$ | async as transactions">
 
-    <mat-card-title>
-        List of Confirmed Transactions
-    </mat-card-title>
-
     <mat-card-content>
 
       <mat-list>
+        <cdk-virtual-scroll-viewport itemSize="10">
         <transaction-item
-          *ngFor="let transaction of transactions | keyvaluefilterslice : searchText : lowValue : highValue"
+          *ngFor="let transaction of transactions | filteraddressslice : searchText : lowValue : highValue"
           [transaction]="transaction">
         </transaction-item>
+        </cdk-virtual-scroll-viewport>
       </mat-list>
 
     </mat-card-content>
 
-    <mat-paginator
-  [length]="transactions.length"
-  [pageSize]="pageSize"
-  (page)="pageEvent = getPaginatorData($event)">
-</mat-paginator>
 
-</mat-card>
+    <mat-paginator
+      [length]="transactions.length"
+      [pageSize]="pageSize"
+      (page)="pageEvent = getPaginatorData($event)">
+    </mat-paginator>
+
+
+  </mat-card>
 
 </div>
-
-
-
-
-

@@ -1,0 +1,35 @@
+<mat-list-item>
+  <mat-icon mat-list-icon>chrome_reader_mode</mat-icon>
+  <h2 mat-line>
+    <b>Block Index</b>: {{index}}
+  </h2>
+  <h4 mat-line>
+    <b>Hash</b>: {{hash}}
+  </h4>
+  <h4 mat-line>
+    <b>Previous Hash</b>: {{previousHash}}
+  </h4>
+  <h4 mat-line>
+    <b>Timestamp</b>: {{timestamp | date:'yyyy-MM-dd'}}  
+  </h4>
+  <h4 mat-line>
+    <b>Minter Balance</b>: {{minterBalance}}
+  </h4>
+  <h4 mat-line>
+    <b>Minter Address</b>: {{minterAddress}}
+  </h4>
+
+
+  <mat-divider></mat-divider>
+
+  <mat-list mat-line>
+    <h3 mat-line><b>This block contains following:</b></h3>
+    <transaction-item
+      *ngFor="let transaction of data"
+      [transaction]="transaction">
+    </transaction-item>
+  </mat-list>
+
+  <mat-divider></mat-divider>
+
+</mat-list-item>

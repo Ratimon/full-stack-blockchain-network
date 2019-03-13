@@ -6,4 +6,4 @@ export const containers: any[] = [AccountsComponent, BlocksComponent, Transactio
 
 export * from './accounts/accounts.component';
 export * from './blocks/blocks.component';
-export * from './transactions/transactions.component'
+export * from './transactions/transactions.component';

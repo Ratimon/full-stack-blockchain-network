@@ -30,8 +30,8 @@ import { ErrorInterceptor } from "./helpers/error-interceptor";
 
 // components
 import { AppComponent } from './containers/app/app.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ErrorComponent } from "./components/error/error.component";
+
+import * as fromComponents from './components';
 
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze]: [];
@@ -53,7 +53,7 @@ export const ROUTES: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    component: fromComponents.NotFoundComponent,
   }   
 ];
 
@@ -77,10 +77,9 @@ export const ROUTES: Routes = [
   ],
   declarations: [
     AppComponent,
-    NotFoundComponent,
-    ErrorComponent,
+    ...fromComponents.components
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorComponent]
+  entryComponents: [fromComponents.ErrorComponent]
 })
 export class AppModule { }

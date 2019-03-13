@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'keyvaluefilter'
+  name: 'filteraddress'
 })
 export class FilterAddressPipe implements PipeTransform {
 
@@ -10,27 +10,32 @@ export class FilterAddressPipe implements PipeTransform {
 
   transform(items: any[], searchText: string): any[] {
 
-
     if(!items) return [];
     if(!searchText) return items;
 
     searchText = searchText.toLowerCase();
 
     return items.filter( it => {
-      return this.isToAddress(it, searchText);
+      return this.isToAddress(it, searchText) || this.isFromAddress(it, searchText);
     });
    }
 
    private isToAddress(it, searchText) :boolean {
 
-
-    if(Object.keys(it.outputMap).includes(searchText)
-      || (it.input.address.toLowerCase() == searchText) ) {
+    if(Object.keys(it.outputMap).includes(searchText)) {
         return true;
-    }else {
+    } else {
       return false;
     }
+   }
 
+   private isFromAddress(it, searchText) :boolean {
+
+    if((it.input.address.toLowerCase() == searchText)) {
+        return true;
+    } else {
+      return false;
+    }
    }
 
 }
