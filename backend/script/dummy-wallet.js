@@ -1,5 +1,4 @@
 const {ec, cryptoHash} = require('../util/index');
-const {blockchain} = require('../backend/index')
 const Wallet = require('../wallet/index')
 
 const dummy_wallet = new Wallet()

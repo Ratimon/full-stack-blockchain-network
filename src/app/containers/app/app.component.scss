@@ -1,12 +1,17 @@
-.all-wrap {
-  min-height: 100vh;
+html, body { 
+  margin: 0;
+  height: 100%;
 }
 
-.page-wrap {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
+// .all-wrap {
+//   min-height: 100vh;
+// }
+
+// .page-wrap {
+//   display: flex;
+//   flex-direction: column;
+//   min-height: 100vh;
+// }
 
 .content {
   flex: 1;
@@ -14,6 +19,7 @@
 
 main {
 
+  padding: 10px;
   display: flex;
   flex-direction: column;
 
@@ -24,4 +30,12 @@ main {
 
   }
 
+}
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
 }

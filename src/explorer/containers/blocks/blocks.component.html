@@ -17,29 +17,30 @@
 </mat-form-field>
 
 <div class="main">
+
   <mat-card
-  class="validated-blocks-card center"
-  *ngIf="block$ | async as blocks">
+    class="validated-blocks-card center"
+    *ngIf="block$ | async as blocks">
 
-  <mat-card-content>
+    <mat-card-content>
 
-    <mat-list>
-      <cdk-virtual-scroll-viewport itemSize="10">
-        <block-item
-          *ngFor="let block of blocks | filterblockslice : searchText : lowValue : highValue"
-          [block]="block">
-        </block-item>
-      </cdk-virtual-scroll-viewport>
-    </mat-list>
+      <mat-list>
+        <cdk-virtual-scroll-viewport itemSize="10">
+          <block-item
+            *ngFor="let block of blocks | filterblock : searchText | slice : lowValue : highValue"
+            [block]="block">
+          </block-item>
+        </cdk-virtual-scroll-viewport>
+      </mat-list>
 
-  </mat-card-content>
+    </mat-card-content>
 
 
-  <mat-paginator
-    [length]="blocks.length"
-    [pageSize]="pageSize"
-    (page)="pageEvent = getPaginatorData($event)">
-  </mat-paginator>
+    <mat-paginator
+      [length]="blocks.length"
+      [pageSize]="pageSize"
+      (page)="pageEvent = getPaginatorData($event)">
+    </mat-paginator>
 
-</mat-card>
+  </mat-card>
 </div>

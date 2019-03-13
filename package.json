@@ -9,9 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test": "jest --watchAll",
-    "start": "node index.js",
-    "dev": "npm run start-redis && nodemon index.js",
-    "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
+    "start": "node ./backend/index.js",
+    "dev": "npm run start-redis && nodemon ./backend/index.js",
+    "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon ./backend/index.js",
     "start-redis": "redis-server --daemonize yes"
   },
   "jest": {

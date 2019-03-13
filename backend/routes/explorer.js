@@ -2,8 +2,7 @@ const express = require('express');
 
 const blockchainController = require('../controllers/blockchain');
 const transactionController = require('../controllers/transaction');
-// const validatorController = require('../controllers/validator');
-
+const walletController = require('../controllers/wallet')
 
 const router = express.Router();
 
@@ -15,7 +14,6 @@ router.get('/explorer/api/transactions', transactionController.getConfirmedTrans
 
 router.get('/explorer/api/transaction-pool-map', transactionController.getTransactionMap);
 
-
-
+router.get('/explorer/api/accounts', walletController.getAccounts);
 
 module.exports = router;

@@ -1,12 +1,15 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Routes, RouterModule } from '@angular/router';
 
-import { NgModule } from '@angular/core';
+import {SharedModule} from  '../shared/shared.module'
 
 import {
+  MatSidenavModule,
+  MatToolbarModule,
   MatDialogModule
 } from '@angular/material';
 
@@ -32,6 +35,8 @@ import { ErrorInterceptor } from "./helpers/error-interceptor";
 import { AppComponent } from './containers/app/app.component';
 
 import * as fromComponents from './components';
+import { SidenavListComponent } from './components/sidenav-list/sidenav-list.component';
+// import { HeaderComponent } from './components/header/header.component';
 
 
 export const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze]: [];
@@ -69,6 +74,9 @@ export const ROUTES: Routes = [
     EffectsModule.forRoot(effects),
     StoreRouterConnectingModule,
     environment.development ? StoreDevtoolsModule.instrument() : [],
+    SharedModule,
+    MatSidenavModule,
+    MatToolbarModule,
     MatDialogModule
   ],
   providers: [
@@ -77,7 +85,9 @@ export const ROUTES: Routes = [
   ],
   declarations: [
     AppComponent,
-    ...fromComponents.components
+    ...fromComponents.components,
+    SidenavListComponent,
+    // HeaderComponent
   ],
   bootstrap: [AppComponent],
   entryComponents: [fromComponents.ErrorComponent]

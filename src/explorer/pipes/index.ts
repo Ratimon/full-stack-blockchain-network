@@ -1,15 +1,9 @@
-import {FilterAddressPipe} from './filter-address.pipe';
+import {FilterAccountPipe} from './filter-account.pipe';
+import {FilterTransactionPipe} from './filter-transaction.pipe';
 import {FilterBlockPipe} from './filter-block.pipe';
 
-export const providerPipes: any[] = [FilterAddressPipe, FilterBlockPipe ];
+export const customPipes: any[] = [FilterAccountPipe, FilterTransactionPipe, FilterBlockPipe ];
 
-export * from './filter-address.pipe';
+export * from './filter-account.pipe';
+export * from './filter-transaction.pipe';
 export * from './filter-block.pipe';
-
-import {FilterAddressSlicePipe} from './filter-address-slice.pipe';
-import {FilterBlockSlicePipe} from './filter-block-slice.pipe';
-
-export const customScrollPipes: any[] = [FilterAddressSlicePipe, FilterBlockSlicePipe];
-
-export * from './filter-address-slice.pipe';
-export * from './filter-block-slice.pipe';

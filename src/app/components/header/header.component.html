@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+
+    <span class="fill-remaining-space"></span>
+
+    <button mat-button>
+      <a routerLink="/wallet">Use Wallet</a>
+    </button>
+
+
+    <button mat-button>
+      <a routerLink="/faucet">Request Money</a>
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item>
+        <mat-icon>voicemail</mat-icon>
+        <a routerLink="/explorer/blocks">Explore Validated Blocks</a>
+      </button>
+
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <a routerLink="/explorer/transactions">Explore Past Transactions</a>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon>voicemail</mat-icon>
+        <a routerLink="/explorer/accounts">Explore Known Accounts</a>
+      </button>
+      
+    </mat-menu>
+
+  </mat-toolbar>

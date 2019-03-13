@@ -1,0 +1,47 @@
+.center{
+    width: 85%;
+    margin: 5px auto;
+  }
+  
+  .main{
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h3 {
+    overflow-x: auto; /* Use horizontal scroller if needed */
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    white-space : normal;
+}
+
+.search-form-field {
+    width: 600px;
+  }
+
+.accounts-card {
+  max-width: 900px;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 50vh;
+
+  mat-list {
+    height: 400px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 1em;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(72,66,183);
+  }
+}

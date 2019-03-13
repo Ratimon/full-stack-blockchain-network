@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -8,6 +12,7 @@ import {Transaction} from '../../models/transaction.model'
 
 @Component({
   selector: 'transactions',
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })

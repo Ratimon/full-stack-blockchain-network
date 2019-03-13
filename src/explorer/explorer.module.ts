@@ -4,9 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {SharedModule} from  '../shared/shared.module'
 
 import {
-  // MatFormFieldModule,
-  // MatCardModule,
-  MatButtonModule,
+  MatExpansionModule,
   MatPaginatorModule
 } from '@angular/material';
 
@@ -16,12 +14,13 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import * as fromContainers from './containers';
 
 // components
-import { BlockItemComponent } from './components/block-item/block-item.component';
+import * as fromComponents from './components';
 
 // services
 import * as fromServices from './services';
 
 // pipes
+import {KeyValuePipe} from '@angular/common'
 import * as fromPipes from './pipes';
 
 // routes
@@ -50,18 +49,17 @@ export const ROUTES: Routes = [
     RouterModule.forChild(ROUTES),
     ScrollingModule,
     SharedModule,
-    MatButtonModule,
-    MatPaginatorModule
+    MatExpansionModule,
+    MatPaginatorModule,
   ],
   providers: [
     ...fromServices.services,
-    ...fromPipes.providerPipes
-  ]
-    ,
+    KeyValuePipe
+  ],
   declarations: [
+    ...fromComponents.components,
     ...fromContainers.containers,
-    ...fromPipes.customScrollPipes,
-    BlockItemComponent
+    ...fromPipes.customPipes,
   ]
 })
 export class ExplorerModule { }

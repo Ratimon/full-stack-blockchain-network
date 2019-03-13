@@ -1,6 +1,8 @@
 const Wallet = require('../wallet/index');
-const {blockchain} = require('../backend/index');
-let {wallet} = require('../backend/index');
+// const {blockchain} = require('../backend/index');
+// let {wallet} = require('../backend/index');
+const {blockchain} = require('../network/index');
+let {wallet} = require('../network/index');
 
 exports.getWallet = (req, res) => {
     const address = wallet.publicKey;
@@ -31,4 +33,22 @@ exports.postRecoverWallet = (req, res) => {
       address: wallet.publicKey,
       balance: wallet.balance
     });
+  }
+
+  exports.getAccounts = (req, res) => {
+    const addressMap = {};
+
+    for (let block of blockchain.chain) {
+      for (let transaction of block.data) {
+        const recipients = Object.keys(transaction.outputMap);
+  
+        recipients.forEach(recipient => addressMap[recipient] = Wallet.calculateBalance({ chain: blockchain.chain, address:recipient })) ;
+        // recipients.forEach(recipient => addressMap[recipient] = recipient);
+
+      }
+    }
+  
+    // res.json(Object.keys(addressMap));
+    res.json(addressMap);
+
   }

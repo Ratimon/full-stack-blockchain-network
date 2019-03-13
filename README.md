@@ -1,8 +1,24 @@
 # Full Stack Blockchain Test Network
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5 (was 6.0.8)
 
 I create Proof of Stake blockchain test network and its frontend for educational purpose, so that I can better understand the blockchain technology.
+
+This work is inspired by
+1) https://lhartikk.github.io/ 
+2) https://github.com/15Dkatz/cryptochain
+
+## Technology
+- NodeJs
+- Socket.io
+- Redis
+- Angular
+
+
+## Start
+
+Run `npm install` to install all dependency packages
+
 
 ## Build static file
 
@@ -28,24 +44,27 @@ Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port 
 
  ### TODO
 
-- [ ] Implement new Reward logic that directly substract from sender 's amount
+- [ ] Implement new Reward logic that directly substract from sender 's transaction amount
 - [ ] Implement Partial Amount Staking Logic
 - [ ] Implement Light and Full node logic
 - [ ] Implement Merkle Tree data structure to store transactions insteadof simple array
+- [ ] Imprement Compressed public key as address
 - [ ] Prevent User from validate the empty transaction pool object
 - [ ] Limit one request per address per hour + captcha in faucet app
 - [ ] Upload the Blockchain to the File System
 - [ ] Load the Blockchain from the File System:
 - [x] Real-tine Transaction Pool Socket Updates
-- [ ] Ngrx to solve overdone API fetch on smaller component
-- [ ] Upgrade to Angular 7 and use Scrolling Module(from Angular Material)
+- [ ] Refactor with Ngrx to solve overdone API fetch on smaller component
+- [X] Upgrade to Angular 7 and use Scrolling Module(from Angular Material)
 - [ ] Fresh Keys Per Transaction: create a new private key on every new transaction
-- [ ] Redis Clusters
+- [ ] Implement a cluster of redis urls as the connections increase
 - [ ] Refactor Backend with Go Programming
 - [ ] Deployment using Docker
 
 ## Post request to validate block
+```
 curl -H "Content-type:application/json" --data '{"data" : "Some data to the first block"}' http://localhost:3000/validate
+```
 
 ## Further help
 

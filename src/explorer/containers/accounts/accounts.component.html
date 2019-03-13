@@ -1,3 +1,45 @@
-<p>
-  accounts works!
-</p>
+<h1>
+  Known Accounts
+</h1>
+
+<mat-form-field class="search-form-field">
+  
+    <input
+      matInput
+      type="text"
+      placeholder="Enter sender or recipient' address to filter the block data"
+      [(ngModel)]="searchText">
+
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+
+</mat-form-field>
+
+<div class="main">
+
+    <mat-card
+      class="accounts-card center"
+      *ngIf="accounts$ | async as accounts">
+
+      <mat-card-content>
+
+          <mat-list>
+              <cdk-virtual-scroll-viewport itemSize="10">
+
+                  <account-item
+                    *ngFor="let account of accounts | filteraccount : searchText ; index as i"
+                    [index]="i"
+                    [address]="account.key"
+                    [balance]="account.value">
+                  </account-item>
+
+              </cdk-virtual-scroll-viewport>
+          </mat-list>
+
+      </mat-card-content>
+
+
+  </mat-card>
+
+</div>

@@ -1,0 +1,36 @@
+<mat-nav-list>
+  <a mat-list-item routerLink="/wallet" (click)="onSidenavClose()">
+      <mat-icon>account_balance</mat-icon>
+      <span class="nav-caption">
+        <a routerLink="/wallet">Use Wallet</a>
+      </span>
+  </a>
+  <a mat-list-item routerLink="/faucet" (click)="onSidenavClose()">
+      <mat-icon>input</mat-icon>
+      <span class="nav-caption">
+        <a routerLink="/faucet">Request Money</a>
+      </span>   
+  </a>
+
+  <mat-list-item [matMenuTriggerFor]="menu">
+      <mat-icon>unfold_more</mat-icon>
+      <a matline>Explorer</a>
+  </mat-list-item>
+
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item (click)="onSidenavClose()">
+        <a routerLink="/explorer/blocks">Explore Validated Blocks</a>
+    </button>
+
+    <button mat-menu-item (click)="onSidenavClose()">
+        <a routerLink="/explorer/transactions">Explore Past Transactions</a>
+    </button>
+
+    <button mat-menu-item (click)="onSidenavClose()">
+      <a routerLink="/explorer/accounts">Explore Known Accounts</a>
+    </button>
+
+  </mat-menu>
+
+</mat-nav-list>

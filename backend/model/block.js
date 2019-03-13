@@ -101,7 +101,9 @@ class Block {
 
 
     static getCurrentTimestamp() {
-        return Math.round(new Date().getTime() / 1000);
+        // return Math.round(Date.now() / 1000);
+        return Math.round(Date.now());
+
     } 
 
  

@@ -1,4 +1,6 @@
-const {blockchain} = require('../backend/index');
+// const {blockchain} = require('../backend/index');
+const {blockchain} = require('../network/index');
+
 
 exports.getBlocks = (req, res, next) => {
     // TODO: File System implemenatation
