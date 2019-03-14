@@ -1,0 +1,41 @@
+/* MessagesComponent's private CSS styles */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Tangerine');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+h2 {
+  color: #163d58;
+  font-size: 1.18em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, div, input[text], button {
+  color: #338ecb;
+  font-size: 0.85em;
+  font-family: 'Roboto', sans-serif;
+}
+  
+button.clear {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+button.clear {
+  color: #888;
+  margin-bottom: 12px;
+}

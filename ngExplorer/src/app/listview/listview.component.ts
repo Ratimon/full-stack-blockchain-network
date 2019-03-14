@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Transaction, OutputMap, Input, Signature } from '../model/transaction';
-import { Block } from '../model/block';
-import { Blockchain } from '../model/blockchain';
-import { BLOCKCHAIN } from '../mock-blockchain';
+import { Observable, of, interval } from 'rxjs';
+import { MessageService } from '../message.service';
+
+import Transaction = require('../model/transaction');
+import Block = require('../model/block');
+import Blockchain = require('../model/blockchain');
+import { PubsubService } from '../pubsub.service';
+import { BLOCKCHAIN, GENESISCHAIN } from '../mock-blockchain';
 
 @Component({
   selector: 'app-listview',
@@ -12,6 +16,7 @@ import { BLOCKCHAIN } from '../mock-blockchain';
 export class ListviewComponent implements OnInit {
 
   blockchain: Block[];
+  private newchain: Block[] = [];
   displayBlkList: Block[];
   startBlkPos: number;
   endBlkPos: number;
@@ -25,26 +30,46 @@ export class ListviewComponent implements OnInit {
   startTxPos: number;
   endTxPos: number;
   lengthOfTxList: number;
+  refreshInterval: Observable<number>;
 
-  getTransactionList() {
+  constructor(private messageService: MessageService, private pubsubService: PubsubService) { }
+
+  ngOnInit() {
+    this.messageService.add('List view component initializing...');
+    this.blockchain = GENESISCHAIN;
+    this.messageService.add('The initial genesis blockchain: '  + JSON.stringify(this.blockchain));
+    this.displayBlkList = [];
+    this.getBlockchain();
+
+    this.transactionList = [];
+    this.lengthOfTxList = 0;
+    this.displayTxList = [];
+    this.getTransactionList();
+
+    this.refreshInterval = interval(10000);
+    this.refreshInterval.subscribe(tick => this.getBlockchain(),
+            error => this.messageService.add(error) );
+    this.refreshInterval.subscribe(tick => this.getTransactionList(),
+            error => this.messageService.add(error) );
+
+    this.messageService.add('List view component initialization complete...');
+  }
+
+  getBlockchain(): void {
+    // this.newchain.chain = BLOCKCHAIN;
+    // this.blockchain = this.newchain.chain;
+    // this.blockchain = BLOCKCHAIN;
+    this.pubsubService.getBlockchain().subscribe(newchain => this.blockchain = newchain);
+    this.startBlkPos = -5;
+    this.endBlkPos = 0;
+    this.displayBlkList = this.blockchain.slice(this.startBlkPos).reverse();
+  }
+
+  getTransactionList(): void {
     for (const block of this.blockchain) {
       this.transactionList = this.transactionList.concat(block.data);
     }
     this.lengthOfTxList = this.transactionList.length;
-  }
-
-  constructor() { }
-
-  ngOnInit() {
-    this.blockchain = BLOCKCHAIN;
-    this.startBlkPos = -5;
-    this.endBlkPos = 0;
-    this.displayBlkList = this.blockchain.slice(this.startBlkPos).reverse();
-
-    this.transactionList = [];
-    this.lengthOfTxList = 0;
-    this.getTransactionList();
-
     this.startTxPos = -5;
     this.endTxPos = 0;
     this.displayTxList = this.transactionList.slice(this.startTxPos).reverse();

@@ -1,6 +1,18 @@
-import { Transaction, OutputMap, Input, Signature } from './model/transaction';
-import { Block } from './model/block';
-import { Blockchain } from './model/blockchain';
+import Transaction = require('./model/transaction');
+import Block = require('./model/block');
+import Blockchain = require('./model/blockchain');
+
+
+export const GENESISCHAIN: Block[] = [
+    {index: 0,
+    hash: 'hash-one',
+    previousHash: '-----',
+    timestamp: Date.parse('2016-07-27T05:30:00.000Z'),
+    data: [],
+    difficulty: 1,
+    minterBalance: 10000,
+    minterAddress: ''}
+];
 
 export const BLOCKCHAIN: Block[] = [
     {index: 0,

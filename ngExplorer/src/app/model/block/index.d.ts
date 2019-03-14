@@ -1,6 +1,8 @@
-import { Transaction, OutputMap, Input, Signature } from './transaction';
+import Transaction = require('../transaction');
 
-export class Block {
+export = Block;
+
+declare class Block {
     constructor();
     index: number;
     hash: string;
@@ -10,4 +12,7 @@ export class Block {
     difficulty: number;
     minterBalance: number;
     minterAddress: string;
+}
+
+declare namespace Block {
 }

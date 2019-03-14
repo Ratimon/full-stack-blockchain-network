@@ -19,10 +19,17 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "@types/lodash": "^4.14.122",
+    "@types/lodash": "^4.14.123",
+    "@types/redis": "^2.8.10",
     "core-js": "^2.5.4",
     "crypto": "^1.0.1",
+    "fs": "0.0.1-security",
+    "hiredis": "^0.5.0",
+    "net": "^1.0.2",
+    "node-gyp": "^3.8.0",
+    "redis": "^2.8.0",
     "rxjs": "~6.3.3",
+    "tls": "0.0.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
@@ -31,9 +38,11 @@
     "@angular/cli": "~7.3.4",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
-    "@types/node": "~8.9.4",
+    "@types/bignumber.js": "^5.0.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^8.10.43",
+    "bignumber.js": "^8.1.1",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
@@ -46,5 +55,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
+  },
+  "browser": {
+    "fs": false
   }
 }
