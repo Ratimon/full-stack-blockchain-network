@@ -8,14 +8,17 @@ import Blockchain = require('../model/blockchain');
 import { PubsubService } from '../pubsub.service';
 import { BLOCKCHAIN, GENESISCHAIN } from '../mock-blockchain';
 
+export let globalBlockchain: Block[];
+export let globalTransactionList: Transaction[];
+
 @Component({
   selector: 'app-listview',
   templateUrl: './listview.component.html',
   styleUrls: ['./listview.component.css']
 })
+
 export class ListviewComponent implements OnInit {
 
-  blockchain: Block[];
   private newchain: Block[] = [];
   displayBlkList: Block[];
   startBlkPos: number;
@@ -25,7 +28,6 @@ export class ListviewComponent implements OnInit {
   selectedBlock: Block;
   selectedTransaction: Transaction;
 
-  transactionList: Transaction[];
   displayTxList: Transaction[];
   startTxPos: number;
   endTxPos: number;
@@ -36,12 +38,12 @@ export class ListviewComponent implements OnInit {
 
   ngOnInit() {
     this.messageService.add('List view component initializing...');
-    this.blockchain = GENESISCHAIN;
-    this.messageService.add('The initial genesis blockchain: '  + JSON.stringify(this.blockchain));
+    globalBlockchain = GENESISCHAIN;
+    this.messageService.add('The initial genesis blockchain: '  + JSON.stringify(globalBlockchain));
     this.displayBlkList = [];
     this.getBlockchain();
 
-    this.transactionList = [];
+    globalTransactionList = [];
     this.lengthOfTxList = 0;
     this.displayTxList = [];
     this.getTransactionList();
@@ -57,22 +59,22 @@ export class ListviewComponent implements OnInit {
 
   getBlockchain(): void {
     // this.newchain.chain = BLOCKCHAIN;
-    // this.blockchain = this.newchain.chain;
-    // this.blockchain = BLOCKCHAIN;
-    this.pubsubService.getBlockchain().subscribe(newchain => this.blockchain = newchain);
+    // globalBlockchain = this.newchain.chain;
+    // globalBlockchain = BLOCKCHAIN;
+    this.pubsubService.getBlockchain().subscribe(newchain => globalBlockchain = newchain);
     this.startBlkPos = -5;
     this.endBlkPos = 0;
-    this.displayBlkList = this.blockchain.slice(this.startBlkPos).reverse();
+    this.displayBlkList = globalBlockchain.slice(this.startBlkPos).reverse();
   }
 
   getTransactionList(): void {
-    for (const block of this.blockchain) {
-      this.transactionList = this.transactionList.concat(block.data);
+    for (const block of globalBlockchain) {
+      globalTransactionList = globalTransactionList.concat(block.data);
     }
-    this.lengthOfTxList = this.transactionList.length;
+    this.lengthOfTxList = globalTransactionList.length;
     this.startTxPos = -5;
     this.endTxPos = 0;
-    this.displayTxList = this.transactionList.slice(this.startTxPos).reverse();
+    this.displayTxList = globalTransactionList.slice(this.startTxPos).reverse();
   }
 
   onSelectBlock(block: Block): void {
@@ -84,7 +86,7 @@ export class ListviewComponent implements OnInit {
   }
 
   onBackBlock() {
-    this.lengthOfBlkList = this.blockchain.length;
+    this.lengthOfBlkList = globalBlockchain.length;
 
     if (this.endBlkPos === 0 || this.lengthOfBlkList === 0 ) {
       return;
@@ -92,15 +94,15 @@ export class ListviewComponent implements OnInit {
       this.startBlkPos = this.endBlkPos;
       this.endBlkPos = this.endBlkPos + 5;
       if (this.endBlkPos === 0) {
-        this.displayBlkList = this.blockchain.slice(this.startBlkPos).reverse();
+        this.displayBlkList = globalBlockchain.slice(this.startBlkPos).reverse();
       } else {
-        this.displayBlkList = this.blockchain.slice(this.startBlkPos, this.endBlkPos).reverse();
+        this.displayBlkList = globalBlockchain.slice(this.startBlkPos, this.endBlkPos).reverse();
       }
     }
   }
 
   onNextBlock() {
-    this.lengthOfBlkList = this.blockchain.length;
+    this.lengthOfBlkList = globalBlockchain.length;
 
     if ( (this.lengthOfBlkList + this.endBlkPos ) <= 5 ) {
       return;
@@ -111,11 +113,11 @@ export class ListviewComponent implements OnInit {
         this.endBlkPos = this.endBlkPos - 5;
         this.startBlkPos = this.endBlkPos - 5;
       }
-    this.displayBlkList = this.blockchain.slice(this.startBlkPos, this.endBlkPos).reverse();
+    this.displayBlkList = globalBlockchain.slice(this.startBlkPos, this.endBlkPos).reverse();
   }
 
   onBackTx() {
-    this.lengthOfTxList = this.transactionList.length;
+    this.lengthOfTxList = globalTransactionList.length;
 
     if (this.endTxPos === 0 || this.lengthOfTxList === 0 ) {
       return;
@@ -123,15 +125,15 @@ export class ListviewComponent implements OnInit {
       this.startTxPos = this.endTxPos;
       this.endTxPos = this.endTxPos + 5;
       if (this.endTxPos === 0) {
-        this.displayTxList = this.transactionList.slice(this.startTxPos).reverse();
+        this.displayTxList = globalTransactionList.slice(this.startTxPos).reverse();
       } else {
-        this.displayTxList = this.transactionList.slice(this.startTxPos, this.endTxPos).reverse();
+        this.displayTxList = globalTransactionList.slice(this.startTxPos, this.endTxPos).reverse();
       }
     }
   }
 
   onNextTx() {
-    this.lengthOfTxList = this.transactionList.length;
+    this.lengthOfTxList = globalTransactionList.length;
 
     if ( (this.lengthOfTxList + this.endTxPos ) <= 5 ) {
       return;
@@ -142,6 +144,6 @@ export class ListviewComponent implements OnInit {
         this.endTxPos = this.endTxPos - 5;
         this.startTxPos = this.endTxPos - 5;
       }
-    this.displayTxList = this.transactionList.slice(this.startTxPos, this.endTxPos).reverse();
+    this.displayTxList = globalTransactionList.slice(this.startTxPos, this.endTxPos).reverse();
   }
 }

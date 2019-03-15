@@ -45,7 +45,7 @@
     color:#ffffff;
     background-color:#696f73;
   }
-  .query-input{
+  .query-input {
     float: center;
     width: 60%;
     padding:0.6em 0.6em 0.6em 0.6em;
@@ -78,4 +78,21 @@
   }
   .query-button:active{
     background-color:#163d58;
+  }
+
+  .search-result {
+    float: center;
+    width: 80%;
+    padding: 0.6em 1.2em 0.6em 1.2em;
+    border: none;
+    color: #696f73;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 0.85em;
+    text-align: left;
+  }
+
+  .search-result li {
+    list-style-type: none;
+    word-break: break-all;
   }

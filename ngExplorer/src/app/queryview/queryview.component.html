@@ -1,9 +1,25 @@
 <div class="query-sect">
-  <form class="query-form">
+    <div class="query-form">
        <span class="query-span">Search</span>  
-       <input id="txSearchInput" type="text" placeholder="Enter transaction ID here ..." class="query-input" autocomplete="off"> 
-       <button type="submit" class="query-button">
+       <input #txSearchBox id="txSearchId" class="query-input" type="text" placeholder="Enter transaction ID here ..." (input)="getTransactionById(txSearchBox.value)" />
+<!--       <button type="submit" class="query-button">
            <i class="material-icons">search</i>
        </button>
-   </form>
+       -->
+    </div>
+    <ul class="search-result" *ngIf="showQuery">
+        <li><span>Transaction Id: {{transactionFound.id}} </span></li>
+        <li><span>Timestamp:      {{transactionFound.input.timestamp | date: 'full'}} </span></li>
+        <li><span>Input Wallet:   {{transactionFound.input.address}} </span></li>
+        <li><span>Balance:        {{transactionFound.input.amount}} </span></li>
+        <li *ngFor="let output of transactionFound.outputMap | keyvalue">
+            <span>Output Wallet:  {{output.key}}   </span>
+            <span>Amount: {{output.value}} </span>
+        </li>
+        <li>Signature
+            <ol>r: {{transactionFound.input.signature.r}} </ol>
+            <ol>s: {{transactionFound.input.signature.s}} </ol>
+            <ol>recoveryParm: {{transactionFound.input.signature.recoveryParm}} </ol>
+        </li>
+    </ul>
 </div>
