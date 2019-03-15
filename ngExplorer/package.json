@@ -24,7 +24,6 @@
     "core-js": "^2.5.4",
     "crypto": "^1.0.1",
     "fs": "0.0.1-security",
-    "hiredis": "^0.5.0",
     "net": "^1.0.2",
     "node-gyp": "^3.8.0",
     "redis": "^2.8.0",
@@ -38,12 +37,15 @@
     "@angular/cli": "~7.3.4",
     "@angular/compiler-cli": "~7.2.0",
     "@angular/language-service": "~7.2.0",
+    "@types/assert": "^1.4.2",
     "@types/bignumber.js": "^5.0.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^8.10.43",
     "bignumber.js": "^8.1.1",
+    "buffer": "^5.2.1",
     "codelyzer": "~4.5.0",
+    "hiredis": "^0.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.0.0",
@@ -51,10 +53,13 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "path": "^0.12.7",
     "protractor": "~5.4.0",
+    "redis-parser": "^3.0.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "webpack": "^4.29.6"
   },
   "browser": {
     "fs": false
