@@ -22,13 +22,13 @@ Run `npm install` to install all dependency packages
 
 ## Build static file
 
-Run `dev-front` to build the static file. The build artifacts will be stored in the `dist/` directory.
+Run `npm run dev-front` to build the static file. The build artifacts will be stored in the `dist/` directory.
 
 ## Development server
 
-Run `ng run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 
-Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port specified in the terminal. The app will automatically reload if you change any of the source files. It also syncs the chain via the redis channel
+Run `npm run dev-peer` for a dev server. Navigate to the localhost with the port specified in the terminal. The app will automatically reload if you change any of the source files. It also syncs the chain via the redis channel
 
 ## Use the Wallet
 
@@ -41,6 +41,13 @@ Run `ng run dev-peer` for a dev server. Navigate to the localhost with the port 
  Navigate to `http://localhost:3000/faucet` to request the testing money.
 
  ## Explorers
+
+ Navigate to `http://localhost:3000/explorer/blocks` to explore validated blocks
+
+ Navigate to `http://localhost:3000/explorer/transactions` to explore confirmed transactions
+
+ Navigate to `http://localhost:3000/explorer/accounts` to explore accounts' addresses and balances
+ 
 
  ### TODO
 
