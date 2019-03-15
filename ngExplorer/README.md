@@ -61,6 +61,18 @@ Second option, the workaround only for development test, is to disable web secur
 
 C:\Program Files (x86)\Google\Chrome\Application>chrome --disable-web-security --user-data-dir="c:\temp"
 
+## To do list
+
+This is a prototype of blockchain explorer based on Angular CLI 7 and Node 8. It's portable across Win32, Linux and MacOS X abeit recompilation ("ng build") is required. The user interface is engineering oriented for proof-of-concept and functional. More could be done to improve the application in the next and subsequent releases.
+
+It's worth to explore secured web socket (WSS) for interprocess communication with blockchain node. That will potentially reduce the latency in updating the blockchain. The periodic HTTP Get request and response introduces fixed latency in the data update. The WSS also provides secured and always-on connection between the explorer and node.
+
+Another major aspect to explore is differential update. That is process and data lighter than transferring, comparing and replacing the whole chain everytime. As the blockchain node has performed validation, comparison and update on the blockchain, it's repetitive effort to carry out similar cycles on explorer. The blockchain explorer and node work together as trusted pair. Explorer could read from a common data store to update the data incrementally. This makes the scaling feasible when the blockchain data grows over time. 
+
+Integration of explorer with node is another possibility to enhance the scalability of the network while serving data exploration. Explorer and node could share a common in-memory data store for performance and resource optimization. Explorer only reads from the data store while node manage and update the store. 
+
+Further down the horizon, it is feasible to morph explorer and node into microservices. That will allow the network to leverage on the autoscaling, multi-tier and multi-zone capabilities in many public clouds. Such capabilities could serve even higher transaction rate and achieve elastic scaling in response toor anticipation of fluctuating rate. 
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
