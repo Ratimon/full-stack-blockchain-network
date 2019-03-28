@@ -2,7 +2,7 @@ const express = require('express');
 
 const walletController = require('../controllers/wallet');
 const transactionController = require('../controllers/transaction')
-const validatorController = require('../controllers/validator');
+const minerController = require('../controllers/miner');
 
 const router = express.Router();
 
@@ -15,6 +15,11 @@ router.post('/wallet/create', walletController.postCreateWallet)
 
 router.post('/wallet/transact', transactionController.postTransact);
 
-router.get('/wallet/validate-transactions', validatorController.getValidateTransactions);
+router.get('/wallet/mine-transactions', minerController.getMineTransactions);
+
+router.get('/wallet/start-mining-transactions', minerController.getStartMiningTransactions);
+
+router.get('/wallet/stop-mining', minerController.getStopMining);
+
 
 module.exports = router;

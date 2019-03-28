@@ -51,10 +51,23 @@ export class WalletService {
       .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
 
-  validateTransactions(): Observable<Object> {
+  mineTransactions(): Observable<Object> {
     return this.http
-      .get<Object>(`wallet/validate-transactions`)
+      .get<Object>(`wallet/mine-transactions`)
       .pipe(catchError((error: any) => observableThrowError(error.json())));
   }
+
+  startMiningTransactions(): Observable<Object> {
+    return this.http
+      .get<Object>(`wallet/start-mining-transactions`)
+      .pipe(catchError((error: any) => observableThrowError(error.json())));
+  }
+
+  stopMining() : Observable<Object> {
+    return this.http
+    .get<Object>(`wallet/stop-mining`)
+    .pipe(catchError((error: any) => observableThrowError(error.json())));
+  }
+
 
 }

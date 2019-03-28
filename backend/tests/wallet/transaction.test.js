@@ -169,11 +169,11 @@ describe('Transaction',()=>{
     });
 
     describe('rewardTransaction()', () => {
-        let rewardTransaction, validatorWallet;
+        let rewardTransaction, minerWallet;
     
         beforeEach(() => {
-          validatorWallet = new Wallet();
-          rewardTransaction = Transaction.rewardTransaction({ validatorWallet });
+          minerWallet = new Wallet();
+          rewardTransaction = Transaction.rewardTransaction({ minerWallet });
         });
     
         it('creates a transaction with the reward input', () => {
@@ -181,7 +181,7 @@ describe('Transaction',()=>{
         });
     
         it('creates one transaction for the miner with the `REWARD`', () => {
-          expect(rewardTransaction.outputMap[validatorWallet.publicKey]).toEqual(REWARD);
+          expect(rewardTransaction.outputMap[minerWallet.publicKey]).toEqual(REWARD);
         });
         
       });

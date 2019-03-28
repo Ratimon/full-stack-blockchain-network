@@ -117,11 +117,11 @@ describe('Wallet',()=>{
         });
     
         describe('and there are outputs for the wallet', () => {
-          let transactionOne, transactionTwo, validatorWallet;
+          let transactionOne, transactionTwo, minerWallet;
     
           beforeEach(() => {
 
-            validatorWallet = new Wallet()
+            minerWallet = new Wallet()
 
 
             transactionOne = new Wallet().createTransaction({
@@ -136,8 +136,6 @@ describe('Wallet',()=>{
             ////
             blockchain.addBlock({
               data: [transactionOne, transactionTwo],
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
             });
 
           });
@@ -169,8 +167,6 @@ describe('Wallet',()=>{
               ////
               blockchain.addBlock({
                 data: [recentTransaction],
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
               });
             });
     
@@ -192,13 +188,11 @@ describe('Wallet',()=>{
                   amount: 60
                 });
     
-                sameBlockTransaction = Transaction.rewardTransaction({ validatorWallet: wallet });
+                sameBlockTransaction = Transaction.rewardTransaction({ minerWallet: wallet });
                 
                 ////
                 blockchain.addBlock({
                   data: [recentTransaction, sameBlockTransaction],
-                  balance: validatorWallet.balance,
-                  address: validatorWallet.publicKey
                 });
     
                 nextBlockTransaction = new Wallet().createTransaction({
@@ -209,8 +203,6 @@ describe('Wallet',()=>{
                 ////
                 blockchain.addBlock({
                   data: [nextBlockTransaction],
-                  balance: validatorWallet.balance,
-                  address: validatorWallet.publicKey
                 });
               });
     
@@ -251,8 +243,6 @@ describe('Wallet',()=>{
 
         blockchain.addBlock({
           data: [transactionOne, transactionTwo],
-          balance: existingWallet.balance,
-          address: existingWallet.publicKey
         });
 
       });

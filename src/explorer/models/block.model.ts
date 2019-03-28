@@ -7,6 +7,4 @@ export interface Block {
     timestamp: string
     data: Transaction[];
     difficulty: number;
-    minterBalance: number;
-    minterAddress: string
 };

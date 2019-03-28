@@ -81,9 +81,25 @@ export class WalletDashboardComponent implements OnInit, DoCheck {
     });
   }
 
-  onValidate() {
-    this.walletService.validateTransactions().subscribe((response)=>{
+
+  onMine(){
+    this.walletService.mineTransactions().subscribe((response)=>{
+      console.log('response', response);
+    })
+  }
+
+  onStart() {
+    this.walletService.startMiningTransactions().subscribe((response)=>{
       console.log('response', response);
     });
   }
+
+
+  onStop(){
+    this.walletService.stopMining().subscribe((response)=>{
+      console.log('response', response);
+    })
+  }
+
+
 }

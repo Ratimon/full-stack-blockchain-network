@@ -2,21 +2,22 @@
 const path = require('path');
 
 // TODO: File System implemenatation
-const p = path.join(
-    // path.dirname(process.mainModule.filename),
-    path.dirname(require.main.filename),
-    'data',
-    'blockchain.json'
-  );
+// const p = path.join(
+//     // path.dirname(process.mainModule.filename),
+//     path.dirname(require.main.filename),
+//     'data',
+//     'blockchain.json'
+//   );
 
 const Block = require('./block');
 const Wallet = require('../wallet/index')
-const Transaction = require('../wallet/transaction')
+const Transaction = require('../wallet/transaction');
 const cryptoHash = require('../util/crypto-hash');
 
-const BLOCK_TIME = 10;
-const DIFFICULTY_ADJUSTMENT_INTERVAL = 10;
-const {REWARD_INPUT, REWARD} = require('../wallet/config')
+// const BLOCK_TIME = 10;
+// const DIFFICULTY_ADJUSTMENT_INTERVAL = 10;
+const {REWARD_INPUT, REWARD} = require('../wallet/config');
+const REQUEST_AMOUNT = 1000;
 
 // TODO: File System implemenatation
 // const getBlocksFromFile = cb => {
@@ -34,28 +35,15 @@ class Blockchain {
         this.chain = [Block.genesis()];
     }
 
-    // addBlock({data}){
-    addBlock({data, balance, address}){
+    addBlock({ data }) {
+        const newBlock = Block.mineBlock({
+          previousBlock: this.chain[this.chain.length-1],
+          data
+        });
+    
+        this.chain.push(newBlock);
 
-        const validatedBlock = Block.validateBlock({
-            previousBlock: this.chain[this.chain.length-1],
-            data,
-            difficulty: Blockchain.getDifficulty(this.chain),
-            // difficulty: this.chain[this.chain.length-1].difficulty
-            minterBalance: balance,
-            minterAddress: address
-        })
-
-        this.chain.push(validatedBlock);
-
-        // TODO: File System implemenatation
-        // getBlocksFromFile(blocks => {
-        //     this.chain.push(validatedBlock);
-        //     fs.writeFile(p, JSON.stringify(blocks), err => {
-        //       console.log(err);
-        //     });
-        //   });
-    }
+      }
 
     replaceChain(chain, validTransactions, onSuccess){
         // if(chain.length <= this.chain.length){
@@ -69,7 +57,7 @@ class Blockchain {
             return;
         }
 
-        if(validTransactions &&!this.validTransactionData({chain})) {
+        if(validTransactions && !this.validTransactionData({chain})) {
             console.error('The new chain has invalid data');
             return;
         }
@@ -81,39 +69,94 @@ class Blockchain {
     }
 
     validTransactionData({chain}) {
+
+        let latestBlock = chain[chain.length-1]
+        // console.log(latestBlock);
+
+        for(let item of latestBlock.data){
+
+            // console.log('item',item)
+            // console.log('item2',item['input'])
+
+
+            // if(item.input.address !== '049d8f88d66b9f746bfbc42ddbee2b78096c37be9070716bf26e1bea8f501b2c6adb22a8a05f0bcc934db114cf26ad61ee50d70ad9551713014e618690e4d4adae'){
+
+                const trueBalance = Wallet.calculateBalance({
+                    chain: this.chain,
+                    address: item.input.address
+                });
+
+                //in case of not reward transaction only
+                if(item.input.amount) {
+
+                    if ( item.input.amount !== trueBalance) {
+                        console.log(trueBalance)
+                        console.log(item.input.amount)
+                        console.error('Invalid input amount');
+                        // throw new Error('Invalid input amount');
+                        return false;
+                    }
+                }
+
+            }
+
+        // }
+
         for(let i=1; i<chain.length; i++) {
             const block = chain[i];
             const transactionSet = new Set();
             let rewardTransactionCount = 0;
 
             for(let transaction of block.data){
-                if(transaction.input.address === REWARD_INPUT.address) {
-                    rewardTransactionCount += 1;
 
-                    if(rewardTransactionCount > 1) {
-                        console.error('Rewards exceed limit');
-                        return false;
-                    }
+                console.log(transaction)
 
-                    if(Object.values(transaction.outputMap)[0] !== REWARD) {
-                        console.error('reward amount is invalid');
-                        return false;
-                    }
+                if(transaction.input.address === REWARD_INPUT.address){
+
+                    // rewardTransactionCount += 1;
+
+                    // if(rewardTransactionCount > 1) {
+                    //     console.error('Rewards exceed limit');
+                    //     return false;
+                    // }
+
+                    // if(Object.values(transaction.outputMap)[0] !== REWARD ) {
+                    //     console.log(transaction.outputMap);
+                    //     console.log(REWARD);
+                    //     console.error('reward amount is invalid');
+                    //     return false;
+
+                    // }
+
+                    // if(Object.values(transaction.outputMap)[0] !== REQUEST_AMOUNT ) {
+                    //     console.error('request amount is invalid');
+                    //     return false;
+                    // }
+
                 } else {
                     if(!Transaction.validTransaction(transaction)) {
                         console.error('Invalid transaction')
                         return false;
                     }
 
-                    const trueBalance = Wallet.calculateBalance({
-                        chain: this.chain,
-                        address: transaction.input.address
-                      });
-            
-                      if (transaction.input.amount !== trueBalance) {
-                        console.error('Invalid input amount');
-                        return false;
-                      }
+                    // if(transaction.input.address !== '049d8f88d66b9f746bfbc42ddbee2b78096c37be9070716bf26e1bea8f501b2c6adb22a8a05f0bcc934db114cf26ad61ee50d70ad9551713014e618690e4d4adae'){
+
+                    //     const trueBalance = Wallet.calculateBalance({
+                    //         chain: this.chain,
+                    //         address: transaction.input.address
+                    //     });
+
+                    //     //   if ( (transaction.input.amount !== trueBalance)
+                    //     //   && (transaction.input.address !=='049d8f88d66b9f746bfbc42ddbee2b78096c37be9070716bf26e1bea8f501b2c6adb22a8a05f0bcc934db114cf26ad61ee50d70ad9551713014e618690e4d4adae') ) {
+
+                    //     if ( transaction.input.amount !== trueBalance) {
+                    //         console.log(trueBalance)
+                    //         console.log(transaction.input.amount)
+                    //         console.error('Invalid input amount');
+                    //         // throw new Error('Invalid input amount');
+                    //         return false;
+                    //     }
+                    // }
 
                       if(transactionSet.has(transaction)) {
                         console.error('An identical transaction appears more than once in the block');
@@ -138,9 +181,6 @@ class Blockchain {
     //     });
     //   }
 
-    // static fetchAll(cb) {
-    //     getBlocksFromFile(cb);
-    // }
 
     static isValidChain(chain) {
 
@@ -149,8 +189,9 @@ class Blockchain {
         }
 
         for(let i=1; i< chain.length; i++){
-            const {index, hash, previousHash,  timestamp, data, difficulty, minterBalance, minterAddress} = chain[i];
+            const {index, hash, previousHash,  timestamp, data, difficulty, nonce} = chain[i];
             const actualPreviousHash = chain[i-1].hash;
+            const lastDifficulty = chain[i-1].difficulty;
 
             if(previousHash !== actualPreviousHash) {
                 return false;
@@ -162,42 +203,20 @@ class Blockchain {
                 timestamp,
                 data,
                 difficulty,
-                minterBalance,
-                minterAddress
+                nonce
             )
 
             if (hash !== validatedHash) {
+                return false;
+            }
+
+            if (Math.abs(lastDifficulty - difficulty) > 1){
                 return false;
             }
         }
         return true;
     }
 
-    static getDifficulty (chain) {
-        const latestBlock = chain[chain.length - 1];
-        const {index, difficulty } = latestBlock
-
-        if (difficulty < 1) return 1;
-
-        if (index % DIFFICULTY_ADJUSTMENT_INTERVAL === 0 && index !== 0) {
-            return Blockchain.getAdjustedDifficulty(latestBlock, chain);
-        } else {
-            return difficulty;
-        }
-    };  
-    
-    static getAdjustedDifficulty (latestBlock, chain) {
-        const preAdjustedBlock = chain[chain.length - DIFFICULTY_ADJUSTMENT_INTERVAL];
-        const expectedTime = BLOCK_TIME * DIFFICULTY_ADJUSTMENT_INTERVAL;
-        const takenTime = latestBlock.timestamp - preAdjustedBlock.timestamp;
-        if (takenTime < expectedTime / 2) {
-            return preAdjustedBlock.difficulty + 1;
-        } else if (takenTime > expectedTime * 2) {
-            return preAdjustedBlock.difficulty - 1;
-        } else {
-            return preAdjustedBlock.difficulty;
-        }
-    }
 
     static getCumulativeDifficulty(chain) {
         return chain
@@ -206,7 +225,6 @@ class Blockchain {
             .reduce((a, b) => a + b);
     }
 
-   
 
 }
 

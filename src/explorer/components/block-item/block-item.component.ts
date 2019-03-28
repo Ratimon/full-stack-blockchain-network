@@ -22,8 +22,7 @@ export class BlockItemComponent implements OnInit {
   previousHash: string;
   timestamp: string;
   data: Transaction[];
-  minterBalance: number;
-  minterAddress: string;
+  difficulty: number;
 
   panelOpenState = false;
 
@@ -35,8 +34,7 @@ export class BlockItemComponent implements OnInit {
     this.previousHash=this.block.previousHash;
     this.timestamp= this.block.timestamp;
     this.data= this.block.data;
-    this.minterBalance=this.block.minterBalance
-    this.minterAddress= this.block.minterAddress
+    this.difficulty=this.block.difficulty;
   }
 
 }

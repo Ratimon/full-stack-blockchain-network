@@ -30,6 +30,8 @@ Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The ap
 
 Run `npm run dev-peer` for a dev server. Navigate to the localhost with the port specified in the terminal. The app will automatically reload if you change any of the source files. It also syncs the chain via the redis channel
 
+`npm run test backend/tests/`
+
 ## Use the Wallet
 
  Navigate to `http://localhost:3000/wallet` or other peer port specified in the terminal
@@ -52,7 +54,7 @@ Run `npm run dev-peer` for a dev server. Navigate to the localhost with the port
  ### TODO
 
 - [ ] Implement new Reward logic that directly substract from sender 's transaction amount
-- [ ] Implement Partial Amount Staking Logic
+- [ ] Implement Partial Amount Staking Logic on another branch
 - [ ] Implement Light and Full node logic
 - [ ] Implement Merkle Tree data structure to store transactions insteadof simple array
 - [ ] Imprement Compressed public key as address

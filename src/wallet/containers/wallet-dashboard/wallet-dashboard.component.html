@@ -53,9 +53,11 @@
     *ngIf="transactions$ | async as transactions">
 
 
-      <wallet-validate
-        (validate)="onValidate($event)">
-      </wallet-validate>
+      <wallet-mine
+        (mine)="onMine($event)"
+        (start)="onStart($event)"
+        (stop)="onStop($event)">
+      </wallet-mine>
 
       <mat-card-title>
           List of Transaction Pool

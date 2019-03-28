@@ -4,7 +4,7 @@ const TransactionPool = require('../../wallet/transaction-pool');
 const Wallet = require('../../wallet/index');
 
 describe('TransactionPool', ()=>{
-    let transactionPool, transaction, senderWallet, validatorWallet;
+    let transactionPool, transaction, senderWallet, minerWallet;
 
     beforeEach(()=>{
         transactionPool = new TransactionPool();
@@ -14,7 +14,7 @@ describe('TransactionPool', ()=>{
             recipient: 'fake-recipient',
             amount: 50
         });
-        validatorWallet = new Wallet();
+        minerWallet = new Wallet();
     });
 
     describe('setTransaction()', ()=>{
@@ -96,8 +96,8 @@ describe('TransactionPool', ()=>{
             if (i%2===0) {
               blockchain.addBlock({
                 data: [transaction],
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
+                balance: minerWallet.balance,
+                address: minerWallet.publicKey
               })
             } else {
               expectedTransactionMap[transaction.id] = transaction;

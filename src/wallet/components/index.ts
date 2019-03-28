@@ -4,7 +4,7 @@ import { WalletReceiveComponent } from './wallet-receive/wallet-receive.componen
 import { WalletRecoverComponent } from './wallet-recover/wallet-recover.component';
 import { WalletCreateComponent } from './wallet-create/wallet-create.component';
 import { WalletSendComponent } from './wallet-send/wallet-send.component';
-import { WalletValidateComponent } from './wallet-validate/wallet-validate.component';
+import { WalletMineComponent } from './wallet-mine/wallet-mine.component';
 
 
 export const components: any[] = [
@@ -14,7 +14,7 @@ export const components: any[] = [
     WalletReceiveComponent,
     WalletCreateComponent,
     WalletSendComponent,
-    WalletValidateComponent
+    WalletMineComponent
 ];
 
 export * from './wallet-existing/wallet-existing.component';
@@ -23,6 +23,6 @@ export * from './wallet-recover/wallet-recover.component';
 export * from './wallet-receive/wallet-receive.component';
 export * from './wallet-create/wallet-create.component';
 export * from './wallet-send/wallet-send.component';
-export * from './wallet-validate/wallet-validate.component';
+export * from './wallet-mine/wallet-mine.component';
 
 

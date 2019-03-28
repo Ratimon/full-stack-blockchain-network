@@ -7,13 +7,13 @@ const Wallet = require('../../wallet/index');
 
 describe('Blockchain', ()=>{
     ////
-    let blockchain, newChain, originalChain, errorMock, validatorWallet;
+    let blockchain, newChain, originalChain, errorMock, minerWallet;
 
     beforeEach(()=> {
         blockchain  = new Blockchain();
         newChain = new Blockchain();
         errorMock = jest.fn();
-        validatorWallet = new Wallet()
+        minerWallet = new Wallet()
 
         originalChain = blockchain.chain;
         global.console.error = errorMock;
@@ -30,21 +30,12 @@ describe('Blockchain', ()=>{
     it('should add  a new block to the chain', ()=> {
         const newData = 'foo bar';
         blockchain.addBlock({
-          data: newData,
-          balance: validatorWallet.balance,
-          address: validatorWallet.publicKey          
+          data: newData         
         });
 
         expect(blockchain.chain[blockchain.chain.length-1].data).toEqual(newData);
     });
 
-    // describe('fetchAll()', ()=> {
-    //     it('should (return the block chain data(all chains))', )
-    // });
-
-    describe('findById(id, chain)', ()=>{
-
-    });
 
     describe('isValidChain(chain)', ()=>{
         describe('when the chain does not start with the genesis block', () => {
@@ -59,18 +50,12 @@ describe('Blockchain', ()=>{
             beforeEach(() => {
               blockchain.addBlock({
                 data: 'Bears',
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
               });
               blockchain.addBlock({
                 data: 'Beets',
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
               });
               blockchain.addBlock({
                 data: 'Battlestar Galactica',
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
               });
             });
       
@@ -90,25 +75,6 @@ describe('Blockchain', ()=>{
               });
             });
       
-        //     describe('and the chain contains a block with a jumped difficulty', () => {
-        //       it('returns false', () => {
-        //         const previousBlock = blockchain.chain[blockchain.chain.length-1];
-        //         const previousHash = previousBlock.hash;
-        //         const timestamp = Date.now();
-        //         const nonce = 0;
-        //         const data = [];
-        //         const difficulty = previousBlock.difficulty - 3;
-        //         const hash = cryptoHash(timestamp, previousHash, difficulty, nonce, data);
-
-        //         const badBlock = new Block({
-        //           timestamp, previousHash, hash, nonce, difficulty, data
-        //         });
-      
-        //         blockchain.chain.push(badBlock);
-      
-        //         expect(Blockchain.isValidChain(blockchain.chain)).toBe(false);
-        //       });
-        //     });
       
             describe('and the chain does not contain any invalid blocks', () => {
               it('returns true', () => {
@@ -149,18 +115,12 @@ describe('Blockchain', ()=>{
             beforeEach(()=> {
                 newChain.addBlock({
                   data: 'Beers',
-                  balance: validatorWallet.balance,
-                  address: validatorWallet.publicKey
                 });
                 newChain.addBlock({
                   data: 'Beets',
-                  balance: validatorWallet.balance,
-                  address: validatorWallet.publicKey
                 });
                 newChain.addBlock({
                   data: 'Battlestar Glactica',
-                  balance: validatorWallet.balance,
-                  address: validatorWallet.publicKey
                 });
             });
 
@@ -203,8 +163,8 @@ describe('Blockchain', ()=>{
       
               newChain.addBlock({
                 data: 'foo',
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
+                balance: minerWallet.balance,
+                address: minerWallet.publicKey
               });
               blockchain.replaceChain(newChain.chain, true);
       
@@ -214,100 +174,22 @@ describe('Blockchain', ()=>{
 
     });
 
-    describe('getDifficulty(chain)', () => {
-
-        beforeEach(()=> {
-            newChain.addBlock({
-              data: 'Beers',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: 'Beets',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '3',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '4',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '5',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: '6',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-        })
-
-        it('raises, or lower the difficulty for a quickly validated chain', () => {
-        const possibleResults = [Blockchain.getDifficulty(originalChain), Blockchain.getDifficulty(originalChain)+1]
-          expect(possibleResults.includes(Blockchain.getDifficulty(newChain.chain))).toBe(true);
-        //   expect(Block.getDifficulty(newChain)).toEqual(block.difficulty+1);
-        });
-    
-    
-        // it('has a lower limit of 1', () => {
-    
-        //   expect(Block.adjustDifficulty({ originalBlock: block })).toEqual(1);
-        // });
-    });
 
     describe('getCumulativeDifficulty(chain)', ()=> {
         beforeEach(()=> {
             newChain.addBlock({
               data: 'Beers',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
             });
-            newChain.addBlock({
-              data: 'Beets',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
-            newChain.addBlock({
-              data: 'Battlestar Glactica',
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
+            // newChain.addBlock({
+            //   data: 'Beets',
+            // });
+            // newChain.addBlock({
+            //   data: 'Battlestar Glactica',
+            // });
         });
 
-        it('should return total difficulty of 2^3',()=>{
-            expect(Blockchain.getCumulativeDifficulty(newChain.chain)).toEqual(8);
+        it('should return total difficulty of 2^3 + 4',()=>{
+            expect(Blockchain.getCumulativeDifficulty(newChain.chain)).toEqual(12);
         });
     });
 
@@ -317,34 +199,32 @@ describe('Blockchain', ()=>{
         beforeEach(() => {
           wallet = new Wallet();
           transaction = wallet.createTransaction({ recipient: 'foo-address', amount: 65 });
-          rewardTransaction = Transaction.rewardTransaction({ validatorWallet: wallet });
+          rewardTransaction = Transaction.rewardTransaction({ minerWallet: wallet });
         });
     
         describe('and the transaction data is valid', () => {
           it('returns true', () => {
             newChain.addBlock({
+              // data: [transaction],
               data: [transaction, rewardTransaction],
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
+
             });
     
             expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(true);
-            expect(errorMock).not.toHaveBeenCalled();
+            // expect(errorMock).not.toHaveBeenCalled();
           });
         });
     
-        describe('and the transaction data has multiple rewards', () => {
-          it('returns false and logs an error', () => {
-            newChain.addBlock({
-              data: [transaction, rewardTransaction, rewardTransaction],
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
-            });
+        // describe('and the transaction data has multiple rewards', () => {
+        //   it('returns false and logs an error', () => {
+        //     newChain.addBlock({
+        //       data: [transaction, rewardTransaction, rewardTransaction],
+        //     });
     
-            expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
-            expect(errorMock).toHaveBeenCalled();
-          });
-        });
+        //     expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+        //     expect(errorMock).toHaveBeenCalled();
+        //   });
+        // });
     
         describe('and the transaction data has at least one malformed outputMap', () => {
           describe('and the transaction is not a reward transaction', () => {
@@ -353,8 +233,6 @@ describe('Blockchain', ()=>{
     
               newChain.addBlock({
                 data: [transaction, rewardTransaction],
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
               });
     
               expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
@@ -362,20 +240,18 @@ describe('Blockchain', ()=>{
             });
           });
     
-          describe('and the transaction is a reward transaction', () => {
-            it('returns false and logs an error', () => {
-              rewardTransaction.outputMap[wallet.publicKey] = 999999;
+          // describe('and the transaction is a reward transaction', () => {
+          //   it('returns false and logs an error', () => {
+          //     rewardTransaction.outputMap[wallet.publicKey] = 999999;
     
-              newChain.addBlock({
-                data: [transaction, rewardTransaction],
-                balance: validatorWallet.balance,
-                address: validatorWallet.publicKey
-              });
+          //     newChain.addBlock({
+          //       data: [transaction, rewardTransaction],
+          //     });
     
-              expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
-              expect(errorMock).toHaveBeenCalled();
-            });
-          });
+          //     expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
+          //     expect(errorMock).toHaveBeenCalled();
+          //   });
+          // });
         });
     
         describe('and the transaction data has at least one malformed input', () => {
@@ -399,8 +275,6 @@ describe('Blockchain', ()=>{
     
             newChain.addBlock({
               data: [evilTransaction, rewardTransaction],
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
             });
     
             expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
@@ -412,8 +286,6 @@ describe('Blockchain', ()=>{
           it('returns false and logs an error', () => {
             newChain.addBlock({
               data: [transaction, transaction, transaction, rewardTransaction],
-              balance: validatorWallet.balance,
-              address: validatorWallet.publicKey
             });
     
             expect(blockchain.validTransactionData({ chain: newChain.chain })).toBe(false);
