@@ -5,9 +5,7 @@ const path = require('path');
 
 const Wallet = require('./wallet/index')
 
-// const {blockchain, wallet, transactionPool} = require('./backend');
-const {blockchain, wallet, transactionPool, transactionMiner} = require('./network');
-
+const {blockchain, wallet, transactionPool} = require('./network');
 
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`
@@ -22,17 +20,10 @@ const io = require('socket.io')(server);
 
 app.use(bodyParser.json());
 
-
-// app.use(express.static(path.join(__dirname, '/../dist/blockchain')));
-// app.use('/', (req, res)=>{
-//     res.sendFile(path.join(__dirname, '/../dist/blockchain/index.html'))
-// });
-
 // api routes
 app.use(explorerRoutes);
 app.use(walletRoutes);
 app.use(faucetRoutes);
-
 
 const syncWithRootState = ()=> {
     request({ url:`${ROOT_NODE_ADDRESS}/explorer/api/blocks`}, (error, response, body)=>{
@@ -54,17 +45,6 @@ const syncWithRootState = ()=> {
     });
 };
 
-// const syncWithMiningJob = ()=> {
-//     request({ url:`${ROOT_NODE_ADDRESS}/explorer/api/blocks`}, (error, response, body)=>{
-//         if(!error && response.statusCode === 200) {
-//             const rootChain = JSON.parse(body);
-
-//             console.log('replace chain on a sync with', rootChain);
-//             blockchain.replaceChain(rootChain);
-//         }
-//     });
-
-// };
 
 let PEER_PORT;
 
@@ -87,17 +67,6 @@ io.on('connection', socket => {
         let address = wallet.publicKey;
         let balance = Wallet.calculateBalance({ chain: blockchain.chain, address });
 
-        // request({ url:`${ROOT_NODE_ADDRESS}/explorer/api/transaction-pool-map`}, (error, response, body)=>{
-        //     if(!error && response.statusCode === 200) {
-        //         const transactionPool = JSON.parse(body);
-    
-        //         console.log('replace transactionPool on a sync with', transactionPool);
-                
-                // socket.emit('data', { balance, transactionPoolMap: transactionValidator.transactionPool.getCurrentTransactions() });     
-
-        //     }
-        // })
-        // console.log('transactionPool  with', transactionPool);
         socket.emit('data', { balance, transactionPoolMap: transactionPool });     
     },2000)
 

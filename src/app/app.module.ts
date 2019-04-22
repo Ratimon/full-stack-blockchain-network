@@ -87,7 +87,6 @@ export const ROUTES: Routes = [
     AppComponent,
     ...fromComponents.components,
     SidenavListComponent,
-    // HeaderComponent
   ],
   bootstrap: [AppComponent],
   entryComponents: [fromComponents.ErrorComponent]

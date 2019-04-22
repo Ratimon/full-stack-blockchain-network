@@ -1,4 +1,3 @@
-// const {blockchain, pubsub, wallet, transactionPool, faucetWallet} = require('../backend/index');
 const {blockchain, pubsub, wallet, transactionPool, faucetWallet} = require('../network/index');
 
 exports.getTransactionMap = (req, res) => {

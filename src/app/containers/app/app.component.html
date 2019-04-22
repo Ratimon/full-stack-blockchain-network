@@ -1,21 +1,17 @@
-<!-- <div class="page-wrap"> -->
+<mat-sidenav-container>
 
-  <mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+      <sidenav-list (sidenavClose)="sidenav.close()"></sidenav-list>
+  </mat-sidenav>
 
-    <mat-sidenav #sidenav role="navigation">
-        <sidenav-list (sidenavClose)="sidenav.close()"></sidenav-list>
-    </mat-sidenav>
+  <mat-sidenav-content>
+    
+    <header (sidenavToggle)="sidenav.toggle()"></header>
 
-    <mat-sidenav-content>
-      
-      <header (sidenavToggle)="sidenav.toggle()"></header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
 
-      <!-- <main class="content"> -->
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
-<!-- </div> -->
+</mat-sidenav-container>
 

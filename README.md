@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5 (was 6.0.8)
 
-I create Proof of Stake blockchain test network and its frontend for educational purpose, so that I can better understand the blockchain technology.
+I create Proof of Work blockchain test network and its frontend for educational purpose, so that I can better understand the blockchain technology.
 
 This work is inspired by
 1) https://lhartikk.github.io/ 

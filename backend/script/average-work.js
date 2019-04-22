@@ -1,6 +1,4 @@
 const Blockchain = require('../model/blockchain');
-const Wallet = require('../wallet/index');
-
 const blockchain = new Blockchain();
 
 blockchain.addBlock({ data: 'initial' });

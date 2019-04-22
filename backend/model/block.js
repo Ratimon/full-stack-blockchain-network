@@ -1,9 +1,6 @@
 const hexToBinary = require('hex-to-binary');
 const { GENESIS_DATA, MINE_RATE } = require('./config');
 const {cryptoHash} = require('../util/index');
-// const BigNumber = require('bignumber.js');
-
-// const MINTING_INDEX = 100;
 
 
 class Block {

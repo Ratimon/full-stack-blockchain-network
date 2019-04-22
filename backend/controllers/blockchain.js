@@ -1,4 +1,3 @@
-// const {blockchain} = require('../backend/index');
 const {blockchain} = require('../network/index');
 
 
