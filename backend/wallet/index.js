@@ -5,9 +5,7 @@ const {ec, cryptoHash} = require('../util/index');
 class Wallet {
     constructor(){
         this.balance = STARTING_BALANCE;
-
         this.keyPair = ec.genKeyPair();
-
         this.publicKey = this.keyPair.getPublic().encode('hex');
     }
 
@@ -16,13 +14,9 @@ class Wallet {
     }
 
     recover( {chain, privateKey} ) {
-
         this.keyPair = ec.keyFromPrivate(privateKey);
-
         this.publicKey = this.keyPair.getPublic().encode('hex');
-        
-        this.balance = Wallet.calculateBalance({ chain, address: this.publicKey  })
-
+        this.balance = Wallet.calculateBalance({ chain, address: this.publicKey })
     }
 
     createTransaction({recipient, amount, chain}) {
@@ -45,7 +39,6 @@ class Wallet {
         let hasConductedTransaction = false;
         let outputsTotal = 0;
 
-        // for (let i=1; i<chain.length; i++) {
         for (let i=chain.length-1; i>-1; i--) {
             const block = chain[i];
 
@@ -66,7 +59,6 @@ class Wallet {
                 break;
             }
         }
-        // return STARTING_BALANCE + outputsTotal;
         return hasConductedTransaction ? outputsTotal : STARTING_BALANCE + outputsTotal;
 
   }

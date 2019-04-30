@@ -22,7 +22,6 @@ class Blockchain {
       }
 
     replaceChain(chain, validTransactions, onSuccess){
-        // if(chain.length <= this.chain.length){
         if( Blockchain.getCumulativeDifficulty(chain) <= Blockchain.getCumulativeDifficulty(this.chain)){
             console.error('The new chain must be longer');
             return;

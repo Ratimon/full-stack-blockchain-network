@@ -34,9 +34,9 @@ class Block {
         } while (hexToBinary(hash).substring(0, difficulty) !== '0'.repeat(difficulty));
     
         return new this({index, timestamp, previousHash, data, difficulty, nonce, hash });
-      }
+    }
     
-      static adjustDifficulty({ originalBlock, timestamp }) {
+    static adjustDifficulty({ originalBlock, timestamp }) {
         const { difficulty } = originalBlock;
     
         if (difficulty < 1) return 1;
@@ -44,9 +44,8 @@ class Block {
         if ((timestamp - originalBlock.timestamp) > MINE_RATE ) return difficulty - 1;
     
         return difficulty + 1;
-      }
+    }
 
- 
 }
 
 module.exports = Block;

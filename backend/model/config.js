@@ -1,5 +1,5 @@
 const MINE_RATE = 1000;
-const INITIAL_DIFFICULTY = 3;
+const INITIAL_DIFFICULTY = 10;
 
 const GENESIS_DATA = {
     index: 0,
